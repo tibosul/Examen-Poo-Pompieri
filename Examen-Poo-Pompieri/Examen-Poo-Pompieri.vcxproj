@@ -123,12 +123,52 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Accident.cpp" />
+    <ClCompile Include="Angajat.cpp" />
+    <ClCompile Include="Autoscara.cpp" />
+    <ClCompile Include="Autospeciala.cpp" />
+    <ClCompile Include="Autospeciala_Descarcerare.cpp" />
+    <ClCompile Include="Autospeciala_Stingere.cpp" />
+    <ClCompile Include="Autospeciala_Stingere_Pulbere.cpp" />
+    <ClCompile Include="Autospeciala_Stingere_Spuma.cpp" />
+    <ClCompile Include="Incendiu.cpp" />
+    <ClCompile Include="Incendiu_Electric.cpp" />
+    <ClCompile Include="Incendiu_Vegetatie.cpp" />
+    <ClCompile Include="Interventie.cpp" />
+    <ClCompile Include="I_Angajat.cpp" />
+    <ClCompile Include="I_Autospeciala.cpp" />
+    <ClCompile Include="I_Urgenta.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Pompier.cpp" />
+    <ClCompile Include="Sofer.cpp" />
+    <ClCompile Include="Tura.cpp" />
+    <ClCompile Include="Unitate_Pompieri.cpp" />
+    <ClCompile Include="Urgenta.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Accident.h" />
+    <ClInclude Include="Angajat.h" />
+    <ClInclude Include="Autoscara.h" />
+    <ClInclude Include="Autospeciala.h" />
+    <ClInclude Include="Autospeciala_Descarcerare.h" />
+    <ClInclude Include="Autospeciala_Stingere.h" />
+    <ClInclude Include="Autospeciala_Stingere_Pulbere.h" />
+    <ClInclude Include="Autospeciala_Stingere_Spuma.h" />
     <ClInclude Include="Exceptions.h" />
+    <ClInclude Include="Incendiu.h" />
+    <ClInclude Include="Incendiu_Electric.h" />
+    <ClInclude Include="Incendiu_Vegetatie.h" />
+    <ClInclude Include="Interventie.h" />
+    <ClInclude Include="I_Angajat.h" />
+    <ClInclude Include="I_Autospeciala.h" />
+    <ClInclude Include="I_Urgenta.h" />
     <ClInclude Include="Number_Generator.h" />
+    <ClInclude Include="Pompier.h" />
+    <ClInclude Include="Sofer.h" />
+    <ClInclude Include="Tura.h" />
     <ClInclude Include="Unique_ID_Generator.h" />
+    <ClInclude Include="Unitate_Pompieri.h" />
+    <ClInclude Include="Urgenta.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

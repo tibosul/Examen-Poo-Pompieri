@@ -93,4 +93,56 @@ int random_value = Number_Generator::generate_number();
 
 ## Pași de rezolvare a examenului
 
-*[Secțiunea aceasta va fi completată pe măsură ce progresăm prin rezolvarea examenului]*
+### Pasul 1: Crearea arhitecturii generale a aplicației ✅ COMPLETAT
+
+**Obiectiv**: Crearea tuturor claselor cu respectarea ierarhiilor și derivărilor, plus Factory-uri pentru Design Patterns.
+
+**Clase create**:
+
+#### Interfețe (I_*)
+- `I_Angajat` - interfața pentru angajați
+- `I_Autospeciala` - interfața pentru vehicule speciale  
+- `I_Urgenta` - interfața pentru urgențe
+
+#### Factory-uri (Design Pattern)
+- `I_Angajat_Factory` - pentru crearea angajaților
+- `I_Autospeciala_Factory` - pentru crearea vehiculelor
+- `I_Urgenta_Factory` - pentru crearea urgențelor
+
+#### Ierarhia Angajaților
+```
+I_Angajat
+    └── Angajat
+            ├── Pompier
+            └── Sofer
+```
+
+#### Ierarhia Vehiculelor Speciale
+```
+I_Autospeciala
+    └── Autospeciala
+            ├── Autoscara
+            ├── Autospeciala_Descarcerare
+            └── Autospeciala_Stingere
+                    ├── Autospeciala_Stingere_Pulbere
+                    └── Autospeciala_Stingere_Spuma
+```
+
+#### Ierarhia Urgențelor
+```
+I_Urgenta
+    └── Urgenta
+            ├── Incendiu
+            │       ├── Incendiu_Electric
+            │       └── Incendiu_Vegetatie
+            └── Accident
+```
+
+#### Clase de Management
+- `Interventie` - pentru gestionarea intervențiilor
+- `Tura` - pentru gestionarea turilor de serviciu
+- `Unitate_Pompieri` - entitatea principală (Singleton)
+
+**Puncte obținute**: 3p (Crearea claselor și arhitectura generală) + 1p (Design Patterns - Factory)
+
+**Următorul pas**: Implementarea interfețelor și metodelor virtuale

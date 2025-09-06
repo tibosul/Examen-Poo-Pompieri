@@ -18,6 +18,66 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="I_Angajat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Angajat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pompier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sofer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="I_Autospeciala.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Autospeciala.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Autoscara.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Autospeciala_Descarcerare.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Autospeciala_Stingere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Autospeciala_Stingere_Pulbere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Autospeciala_Stingere_Spuma.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="I_Urgenta.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Urgenta.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Accident.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Incendiu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Incendiu_Electric.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Incendiu_Vegetatie.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Interventie.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tura.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Unitate_Pompieri.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Exceptions.h">
@@ -28,6 +88,66 @@
     </ClInclude>
     <ClInclude Include="Number_Generator.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="I_Angajat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Angajat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pompier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sofer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="I_Autospeciala.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Autospeciala.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Autoscara.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Autospeciala_Descarcerare.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Autospeciala_Stingere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Autospeciala_Stingere_Pulbere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Autospeciala_Stingere_Spuma.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="I_Urgenta.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Urgenta.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Accident.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Incendiu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Incendiu_Electric.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Incendiu_Vegetatie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interventie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tura.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Unitate_Pompieri.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
