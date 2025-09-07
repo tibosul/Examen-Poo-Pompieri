@@ -435,4 +435,112 @@ protected:
 4. **Flexibilitate** - ușor de adăugat noi tipuri de resurse
 5. **Evidență completă** - resursele rămân în evidență după finalizare
 
-**Următorul pas**: Implementarea supraîncărcării operatorului ++
+### Pasul 8: Implementarea supraîncărcării operatorului ++ ✅ COMPLETAT
+
+**Obiectiv**: Supraîncărcarea operatorului ++ pentru incrementarea experienței pompierilor după fiecare intervenție.
+
+**Implementări realizate**:
+
+#### Supraîncărcarea operatorului ++ în clasa Pompier
+```cpp
+// Pre-increment (++pompier)
+Pompier& operator++();
+
+// Post-increment (pompier++)
+Pompier operator++(int);
+```
+
+#### Implementarea operatorilor
+- **Pre-increment**: incrementează `numar_interventii` și returnează referința la obiect
+- **Post-increment**: incrementează `numar_interventii` și returnează o copie a valorii anterioare
+
+#### Integrarea în logica de returnare a resurselor
+- La finalizarea unei intervenții, experiența pompierilor se incrementează automat
+- Se folosește `dynamic_cast` pentru a verifica dacă angajatul este Pompier
+- Se aplică operatorul `++(*pompier)` pentru fiecare pompier mobilizat
+
+#### Exemplu de utilizare
+```cpp
+Pompier pompier("Ion", 5);  // 5 intervenții
+++pompier;                  // acum are 6 intervenții
+pompier++;                  // acum are 7 intervenții, returnează valoarea 6
+```
+
+**Avantaje**:
+1. **Sintaxă naturală** - folosește operatorul ++ standard
+2. **Automatizare** - experiența se incrementează automat la finalizarea intervențiilor
+3. **Flexibilitate** - suportă atât pre-increment cât și post-increment
+4. **Integrare** - se integrează perfect în logica existentă
+
+**Puncte obținute**: 1p (Supraîncărcarea operatorului ++)
+
+### Pasul 9: Implementarea încărcării datelor din fișier ✅ COMPLETAT
+
+**Obiectiv**: Implementarea funcționalității de încărcare a angajaților și autospecialelor din fișier pentru popularea unității.
+
+**Implementări realizate**:
+
+#### Fișierul de date Unitate_Pompieri.txt
+```
+# Format: tip_obiect|parametri_separati_prin_virgula
+
+# Pompieri
+Pompier|Ion Popescu,10
+Pompier|Maria Ionescu,5
+
+# Șoferi
+Sofer|Vasile Petrescu
+Sofer|Elena Georgescu
+
+# Autoscari
+Autoscara|25.5
+Autoscara|30.0
+
+# Autospeciale de descarcerare
+Autospeciala_Descarcerare|2,1
+Autospeciala_Descarcerare|3,2
+
+# Autospeciale de stingere cu pulbere
+Autospeciala_Stingere_Pulbere|500.0
+Autospeciala_Stingere_Pulbere|750.0
+
+# Autospeciale de stingere cu spumă
+Autospeciala_Stingere_Spuma|400.0
+Autospeciala_Stingere_Spuma|600.0
+```
+
+#### Metode implementate în Unitate_Pompieri
+- `incarca_date_din_fisier(const std::string& nume_fisier)` - încarcă datele din fișier
+- `proceseaza_linie_fisier(const std::string& linie)` - procesează fiecare linie din fișier
+
+#### Logica de procesare
+1. **Deschide fișierul** și verifică dacă s-a deschis corect
+2. **Citește linie cu linie** și ignoră comentariile (#) și liniile goale
+3. **Parsează fiecare linie** folosind separatorul `|`
+4. **Creează obiectele** în funcție de tipul specificat
+5. **Adaugă obiectele** în unitatea de pompieri
+
+#### Tipuri de obiecte suportate
+- **Pompier**: `Pompier|nume,numar_interventii`
+- **Sofer**: `Sofer|nume`
+- **Autoscara**: `Autoscara|lungime_scara`
+- **Autospeciala_Descarcerare**: `Autospeciala_Descarcerare|departatoare,foarfece`
+- **Autospeciala_Stingere_Pulbere**: `Autospeciala_Stingere_Pulbere|capacitate`
+- **Autospeciala_Stingere_Spuma**: `Autospeciala_Stingere_Spuma|capacitate`
+
+#### Tratarea erorilor
+- Verifică dacă fișierul s-a deschis corect
+- Ignoră liniile invalide sau goale
+- Elimină spațiile în plus din parametri
+- Folosește `std::stoi()` și `std::stod()` pentru conversii sigure
+
+**Avantaje**:
+1. **Flexibilitate** - ușor de modificat datele prin editarea fișierului
+2. **Separarea datelor** - datele sunt separate de codul aplicației
+3. **Reutilizare** - același fișier poate fi folosit pentru teste diferite
+4. **Extensibilitate** - ușor de adăugat noi tipuri de obiecte
+5. **Robustețe** - tratarea erorilor și validarea datelor
+
+**Puncte obținute**: 1p (Încărcarea datelor din fișiere)
+
+**Următorul pas**: Testarea funcționalității și optimizări finale

@@ -5,6 +5,15 @@
 #include "Interventie.h"
 #include "Tura.h"
 #include "Exceptions.h"
+#include "Pompier.h"
+#include "Sofer.h"
+#include "Autoscara.h"
+#include "Autospeciala_Descarcerare.h"
+#include "Autospeciala_Stingere_Pulbere.h"
+#include "Autospeciala_Stingere_Spuma.h"
+#include "I_Angajat_Factory.h"
+#include "I_Autospeciala_Factory.h"
+#include <stdexcept>
 
 Unitate_Pompieri& Unitate_Pompieri::get_instance()
 {
@@ -127,10 +136,14 @@ void Unitate_Pompieri::returneaza_resurse_din_interventie(Interventie* intervent
 {
     if (!interventie) return;
     
-    // Returnează pompierii
-    for (auto* pompier : interventie->get_pompieri_mobilizati()) {
-        tura.returneaza_pompier(pompier);
-        interventie->returneaza_pompier(pompier);
+    // Returnează pompierii și incrementează experiența lor
+    for (auto* angajat : interventie->get_pompieri_mobilizati()) {
+        // Cast la Pompier pentru a accesa operatorul ++
+        if (auto* pompier = dynamic_cast<Pompier*>(angajat)) {
+            ++(*pompier); // Incrementează experiența pompierului
+        }
+        tura.returneaza_pompier(angajat);
+        interventie->returneaza_pompier(angajat);
     }
     
     // Returnează șoferii
@@ -153,6 +166,118 @@ void Unitate_Pompieri::returneaza_resurse_din_interventie(Interventie* intervent
     
     // Finalizează intervenția
     interventie->finalizeaza_interventia();
+}
+
+void Unitate_Pompieri::incarca_date_din_fisier(const std::string& nume_fisier)
+{
+    std::ifstream fisier(nume_fisier);
+    if (!fisier.is_open()) {
+        throw std::runtime_error("Nu s-a putut deschide fișierul: " + nume_fisier);
+    }
+
+    std::string linie;
+    while (std::getline(fisier, linie)) {
+        // Ignoră liniile goale și comentariile
+        if (linie.empty() || linie[0] == '#') {
+            continue;
+        }
+        
+        proceseaza_linie_fisier(linie);
+    }
+    
+    fisier.close();
+}
+
+void Unitate_Pompieri::proceseaza_linie_fisier(const std::string& linie)
+{
+    std::istringstream iss(linie);
+    std::string tip_obiect;
+    
+    if (!std::getline(iss, tip_obiect, '|')) {
+        return; // Linie invalidă
+    }
+    
+    // Elimină spațiile
+    tip_obiect.erase(0, tip_obiect.find_first_not_of(" \t"));
+    tip_obiect.erase(tip_obiect.find_last_not_of(" \t") + 1);
+    
+    if (tip_obiect == "Pompier") {
+        std::string nume;
+        int numar_interventii = 0;
+        
+        if (std::getline(iss, nume, ',')) {
+            nume.erase(0, nume.find_first_not_of(" \t"));
+            nume.erase(nume.find_last_not_of(" \t") + 1);
+            
+            std::string interventii_str;
+            if (std::getline(iss, interventii_str)) {
+                interventii_str.erase(0, interventii_str.find_first_not_of(" \t"));
+                interventii_str.erase(interventii_str.find_last_not_of(" \t") + 1);
+                numar_interventii = std::stoi(interventii_str);
+            }
+        }
+        
+        Pompier* pompier = new Pompier(nume, numar_interventii);
+        this->add_angajat(pompier);
+    }
+    else if (tip_obiect == "Sofer") {
+        std::string nume;
+        if (std::getline(iss, nume)) {
+            nume.erase(0, nume.find_first_not_of(" \t"));
+            nume.erase(nume.find_last_not_of(" \t") + 1);
+            
+            Sofer* sofer = new Sofer(nume);
+            this->add_angajat(sofer);
+        }
+    }
+    else if (tip_obiect == "Autoscara") {
+        std::string lungime_str;
+        if (std::getline(iss, lungime_str)) {
+            lungime_str.erase(0, lungime_str.find_first_not_of(" \t"));
+            lungime_str.erase(lungime_str.find_last_not_of(" \t") + 1);
+            double lungime = std::stod(lungime_str);
+            
+            Autoscara* autoscara = new Autoscara(lungime);
+            this->add_autospeciala(autoscara);
+        }
+    }
+    else if (tip_obiect == "Autospeciala_Descarcerare") {
+        std::string departatoare_str, foarfece_str;
+        if (std::getline(iss, departatoare_str, ',') && std::getline(iss, foarfece_str)) {
+            departatoare_str.erase(0, departatoare_str.find_first_not_of(" \t"));
+            departatoare_str.erase(departatoare_str.find_last_not_of(" \t") + 1);
+            foarfece_str.erase(0, foarfece_str.find_first_not_of(" \t"));
+            foarfece_str.erase(foarfece_str.find_last_not_of(" \t") + 1);
+            
+            int departatoare = std::stoi(departatoare_str);
+            int foarfece = std::stoi(foarfece_str);
+            
+            Autospeciala_Descarcerare* autospeciala = new Autospeciala_Descarcerare(departatoare, foarfece);
+            this->add_autospeciala(autospeciala);
+        }
+    }
+    else if (tip_obiect == "Autospeciala_Stingere_Pulbere") {
+        std::string capacitate_str;
+        if (std::getline(iss, capacitate_str)) {
+            capacitate_str.erase(0, capacitate_str.find_first_not_of(" \t"));
+            capacitate_str.erase(capacitate_str.find_last_not_of(" \t") + 1);
+            double capacitate = std::stod(capacitate_str);
+            
+            Autospeciala_Stingere_Pulbere* autospeciala = new Autospeciala_Stingere_Pulbere(capacitate);
+            this->add_autospeciala(autospeciala);
+        }
+    }
+    else if (tip_obiect == "Autospeciala_Stingere_Spuma") {
+        std::string capacitate_str;
+        if (std::getline(iss, capacitate_str)) {
+            capacitate_str.erase(0, capacitate_str.find_first_not_of(" \t"));
+            capacitate_str.erase(capacitate_str.find_last_not_of(" \t") + 1);
+            double capacitate = std::stod(capacitate_str);
+            
+            Autospeciala_Stingere_Spuma* autospeciala = new Autospeciala_Stingere_Spuma(capacitate);
+            this->add_autospeciala(autospeciala);
+        }
+    }
 }
 
 

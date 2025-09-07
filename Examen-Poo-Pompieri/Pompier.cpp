@@ -19,3 +19,17 @@ Pompier::Pompier(const std::string& nume, int numar_interventii)
 	this->numar_interventii = numar_interventii;
 	Unitate_Pompieri::get_instance().add_angajat(this);
 }
+
+// Supraîncărcarea operatorului ++ pentru incrementarea experienței
+Pompier& Pompier::operator++()
+{
+	this->numar_interventii++;
+	return *this;
+}
+
+Pompier Pompier::operator++(int)
+{
+	Pompier temp = *this;
+	this->numar_interventii++;
+	return temp;
+}

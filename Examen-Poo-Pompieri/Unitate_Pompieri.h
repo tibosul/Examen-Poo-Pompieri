@@ -2,6 +2,9 @@
 #include "Tura.h"
 #include <map>
 #include <vector>
+#include <string>
+#include <fstream>
+#include <sstream>
 
 
 class I_Angajat;
@@ -44,5 +47,9 @@ public:
 	
 	// Metode pentru returnarea resurselor
 	void returneaza_resurse_din_interventie(Interventie* interventie);
+
+	// Metode pentru încărcarea datelor din fișier
+	void incarca_date_din_fisier(const std::string& nume_fisier);
+	void proceseaza_linie_fisier(const std::string& linie);
 };
 

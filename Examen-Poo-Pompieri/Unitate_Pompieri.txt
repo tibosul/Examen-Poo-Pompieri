@@ -1,0 +1,35 @@
+# Unitate de Pompieri - Date inițiale
+# Format: tip_obiect|parametri_separati_prin_virgula
+
+# Pompieri
+Pompier|Ion Popescu,10
+Pompier|Maria Ionescu,5
+Pompier|Gheorghe Dumitrescu,15
+Pompier|Ana Marinescu,8
+Pompier|Mihai Constantinescu,12
+
+# Șoferi
+Sofer|Vasile Petrescu
+Sofer|Elena Georgescu
+Sofer|Alexandru Radu
+Sofer|Cristina Moldovan
+
+# Autoscari
+Autoscara|25.5
+Autoscara|30.0
+Autoscara|20.0
+
+# Autospeciale de descarcerare
+Autospeciala_Descarcerare|2,1
+Autospeciala_Descarcerare|3,2
+Autospeciala_Descarcerare|1,1
+
+# Autospeciale de stingere cu pulbere
+Autospeciala_Stingere_Pulbere|500.0
+Autospeciala_Stingere_Pulbere|750.0
+Autospeciala_Stingere_Pulbere|600.0
+
+# Autospeciale de stingere cu spumă
+Autospeciala_Stingere_Spuma|400.0
+Autospeciala_Stingere_Spuma|600.0
+Autospeciala_Stingere_Spuma|500.0

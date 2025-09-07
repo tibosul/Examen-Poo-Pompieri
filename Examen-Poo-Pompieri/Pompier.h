@@ -14,5 +14,9 @@ public:
 
 	virtual inline int get_numar_interventii() const override { return this->numar_interventii; }
 	virtual inline void set_numar_interventii(int numar_interventii) override { this->numar_interventii = numar_interventii; }
+
+	// Supraîncărcarea operatorului ++ pentru incrementarea experienței
+	Pompier& operator++(); // Pre-increment
+	Pompier operator++(int); // Post-increment
 };
 
