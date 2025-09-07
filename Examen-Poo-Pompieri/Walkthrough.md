@@ -176,9 +176,11 @@ I_Urgenta
 
 #### Clase derivate specifice:
 
-**Pompier** - moștenește de la Angajat (fără membri suplimentari încă)
+**Pompier** - moștenește de la Angajat cu membri suplimentari:
+- `numar_interventii` - experiența pompierului
+- Constructori: default, cu nume, cu nume și experiență
 
-**Sofer** - moștenește de la Angajat (fără membri suplimentari încă)
+**Sofer** - moștenește de la Angajat:
 
 **Autoscara**:
 - `lungime_scara` - lungimea scării în metri
@@ -193,18 +195,6 @@ I_Urgenta
 
 **Accident**:
 - `numar_vehicule` - numărul de vehicule implicate
-
-**Membri adăugați în clasele derivate**:
-
-**Pompier**:
-- `numar_interventii` - experiența pompierului
-- Constructori: default, cu nume, cu nume și experiență
-
-**Sofer**:
-- Constructori: default, cu nume (fără membri suplimentari încă)
-
-**Autospeciala_Stingere_Pulbere/Spuma**:
-- Constructori: default, cu capacitate material
 
 **Avantaje ale acestei abordări**:
 1. **Cod curat** - fiecare clasă are responsabilități clare
