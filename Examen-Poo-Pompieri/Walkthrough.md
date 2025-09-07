@@ -388,4 +388,51 @@ protected:
 5. **Consistență** - toate urgențele au aceeași structură de resurse
 6. **Acces complet** - getters și setters pentru toate resursele
 
-**Următorul pas**: Implementarea logicii de mutare a resurselor din tură
+### Pasul 7: Implementarea logicii de mutare a resurselor ✅ COMPLETAT
+
+**Obiectiv**: Implementarea funcționalității de mutare a resurselor din tură în intervenție și înapoi.
+
+**Implementări realizate**:
+
+#### Modificarea clasei Interventie
+- **Eliminat**: membrii pentru resursele necesare (acum se accesează prin `urgenta_declansatoare`)
+- **Adăugat**: vectori pentru resursele mobilizate efectiv
+- **Adăugat**: metode pentru mobilizarea și returnarea resurselor
+- **Adăugat**: flag `activa` pentru starea intervenției
+
+#### Metode în Tura pentru mutarea resurselor
+- `muta_pompieri(int numar_necesar)` - mută pompierii din tură
+- `muta_soferi_pentru_autospeciale()` - mută șoferii pentru vehicule
+- `muta_autoscara()` - mută o autoscara
+- `muta_autospeciale_descarcerare()` - mută autospeciale de descarcerare
+- `muta_autospeciale_stingere_pulbere()` - mută autospeciale cu pulbere
+- `muta_autospeciale_stingere_spuma()` - mută autospeciale cu spumă
+
+#### Metode în Tura pentru returnarea resurselor
+- `returneaza_pompier()`, `returneaza_sofer()`, `returneaza_autoscara()`, etc.
+- Resursele se returnează în containerele corespunzătoare
+
+#### Metoda principală în Unitate_Pompieri
+- `mobilizeaza_resurse_pentru_urgenta(I_Urgenta* urgenta)` - mobilizează toate resursele necesare
+- `returneaza_resurse_din_interventie(Interventie* interventie)` - returnează resursele în tură
+
+#### Excepții adăugate
+- `InsufficientFirefightersException` - pompieri insuficienți
+- `InsufficientVehiclesException` - vehicule insuficiente
+- `NoSuitableDriverException` - șofer potrivit lipsă
+
+#### Logica de mobilizare
+1. **Verifică disponibilitatea** resurselor în tură
+2. **Mută resursele** din tură în intervenție (nu clonare!)
+3. **Mobilizează resursele** în intervenție
+4. **Adaugă intervenția** în Unitate_Pompieri
+5. **Returnează resursele** la finalizarea intervenției
+
+**Avantaje**:
+1. **Mutare, nu clonare** - resursele se mută efectiv din tură în intervenție
+2. **Verificări complete** - disponibilitate, cantități, echipamente
+3. **Gestionare centralizată** - toate operațiunile prin Unitate_Pompieri
+4. **Flexibilitate** - ușor de adăugat noi tipuri de resurse
+5. **Evidență completă** - resursele rămân în evidență după finalizare
+
+**Următorul pas**: Implementarea supraîncărcării operatorului ++

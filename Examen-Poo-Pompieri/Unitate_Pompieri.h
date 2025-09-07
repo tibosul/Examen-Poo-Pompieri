@@ -38,5 +38,11 @@ public:
 	void add_autospeciala(I_Autospeciala* autospeciala);
 	void add_interventie(Interventie* interventie);
 	void add_urgenta(I_Urgenta* urgenta);
+
+	// Metoda principală de mobilizare
+	Interventie* mobilizeaza_resurse_pentru_urgenta(I_Urgenta* urgenta);
+	
+	// Metode pentru returnarea resurselor
+	void returneaza_resurse_din_interventie(Interventie* interventie);
 };
 
