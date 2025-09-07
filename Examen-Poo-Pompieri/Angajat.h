@@ -20,7 +20,7 @@ public:
 	virtual inline void set_id(int id) override { this->id_unic = id; }
 	virtual inline void set_nume(const std::string& nume) override { this->nume = nume; }
 
-	virtual inline int get_numar_interventii() const { throw Wrong_Angajat_Type("Nu este un pompier"); }
-	virtual inline void set_numar_interventii(int numar_interventii) { throw Wrong_Angajat_Type("Nu este un pompier"); }
+	virtual inline int get_numar_interventii() const { throw Wrong_Angajat_Type("N'est pas un pompier"); }
+	virtual inline void set_numar_interventii(int numar_interventii) { throw Wrong_Angajat_Type("N'est pas un pompier"); }
 };
 

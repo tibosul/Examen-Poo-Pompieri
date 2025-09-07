@@ -1,115 +1,115 @@
-# Walkthrough - Examen POO Unitate de Pompieri
+# Guide d'implémentation - Examen POO Unité de Pompiers
 
-## Funcționalități pregătite înainte de examen
+## Fonctionnalités préparées avant l'examen
 
-Aceste trei funcționalități sunt create înainte de primirea subiectului, deoarece sunt folosite de majoritatea cerințelor și permit o dezvoltare mai rapidă și organizată a soluției.
+Ces trois fonctionnalités sont créées avant la réception du sujet, car elles sont utilisées par la plupart des exigences et permettent un développement plus rapide et organisé de la solution.
 
-### 1. Exceptions.h - Sistem de Excepții Flexibil
+### 1. Exceptions.h - Système d'Exceptions Flexible
 
-**Scopul**: Oferă un sistem flexibil pentru gestionarea excepțiilor în aplicație.
+**Objectif** : Offre un système flexible pour la gestion des exceptions dans l'application.
 
-**Caracteristici**:
-- Clasă de bază `Exception` cu cod numeric și mesaj
-- Template `Derived_Exception` pentru crearea rapidă de excepții specifice
-- Macro `DEFINE_EXCEPTION` pentru definirea excepțiilor cu sintaxă simplă
-- Destructor virtual pentru gestionarea corectă a ierarhiilor
+**Caractéristiques** :
+- Classe de base `Exception` avec code numérique et message
+- Template `Derived_Exception` pour la création rapide d'exceptions spécifiques
+- Macro `DEFINE_EXCEPTION` pour la définition d'exceptions avec une syntaxe simple
+- Destructeur virtuel pour la gestion correcte des hiérarchies
 
-**Utilizare**:
+**Utilisation** :
 ```cpp
-// Definirea excepțiilor specifice
+// Définition d'exceptions spécifiques
 DEFINE_EXCEPTION(NoSuitableDriverException, 1001);
 DEFINE_EXCEPTION(InsufficientVehiclesException, 1002);
 DEFINE_EXCEPTION(InsufficientFirefightersException, 1003);
 
-// Aruncarea excepțiilor
-throw NoSuitableDriverException("Nu există șofer potrivit pentru autoscarea necesară");
+// Lancement d'exceptions
+throw NoSuitableDriverException("Aucun conducteur approprié pour l'échelle nécessaire");
 ```
 
-**Avantaje**:
-- Flexibilitate maximă în crearea de excepții specifice
-- Cod numeric pentru identificarea rapidă a tipului de excepție
-- Mesaje descriptive pentru debugging
-- Ușurință în adăugarea de noi tipuri de excepții pe măsură ce apar nevoile
+**Avantages** :
+- Flexibilité maximale dans la création d'exceptions spécifiques
+- Code numérique pour l'identification rapide du type d'exception
+- Messages descriptifs pour le débogage
+- Facilité d'ajout de nouveaux types d'exceptions selon les besoins
 
-### 2. Unique_ID_Generator.h - Generator de ID-uri Unice
+### 2. Unique_ID_Generator.h - Générateur d'ID Uniques
 
-**Scopul**: Gestionează automat atribuirea de ID-uri unice pentru diferite tipuri de obiecte.
+**Objectif** : Gère automatiquement l'attribution d'ID uniques pour différents types d'objets.
 
-**Caracteristici**:
-- Template class pentru tipuri diferite de obiecte
-- Static member pentru contorul de ID-uri
-- Clasă non-instanțiată (constructor și destructor șterși)
-- Inițializare cu -1 (primul ID generat va fi 0)
+**Caractéristiques** :
+- Classe template pour différents types d'objets
+- Membre statique pour le compteur d'ID
+- Classe non-instanciable (constructeur et destructeur supprimés)
+- Initialisation avec -1 (le premier ID généré sera 0)
 
-**Utilizare**:
+**Utilisation** :
 ```cpp
-// Pentru diferite tipuri de obiecte
+// Pour différents types d'objets
 int emp_id = Unique_ID_Generator<Employee>::generate_next_id();     // 0, 1, 2...
 int vehicle_id = Unique_ID_Generator<Vehicle>::generate_next_id();  // 0, 1, 2...
 int intervention_id = Unique_ID_Generator<Intervention>::generate_next_id(); // 0, 1, 2...
 ```
 
-**Avantaje**:
-- Type-safe: fiecare tip de obiect are propriul contor
-- Thread-safe pentru aplicații single-threaded
-- Elimină necesitatea gestionării manuale a ID-urilor
-- Previne conflictele de ID-uri între tipuri diferite de obiecte
+**Avantages** :
+- Type-safe : chaque type d'objet a son propre compteur
+- Thread-safe pour les applications mono-thread
+- Élimine la nécessité de gestion manuelle des ID
+- Prévient les conflits d'ID entre différents types d'objets
 
-### 3. Number_Generator.h - Generator de Numere Random
+### 3. Number_Generator.h - Générateur de Nombres Aléatoires
 
-**Scopul**: Oferă funcționalitate de generare a numerelor aleatoare pentru simularea datelor.
+**Objectif** : Offre une fonctionnalité de génération de nombres aléatoires pour la simulation de données.
 
-**Caracteristici**:
-- Lazy initialization a seed-ului (se inițializează doar la prima utilizare)
-- Template cu parametri default pentru intervalul `[min, max]`
-- Clasă non-instanțiată
-- Folosește `time(nullptr)` pentru seed unic
+**Caractéristiques** :
+- Initialisation paresseuse du seed (s'initialise seulement à la première utilisation)
+- Template avec paramètres par défaut pour l'intervalle `[min, max]`
+- Classe non-instanciable
+- Utilise `time(nullptr)` pour un seed unique
 
-**Utilizare**:
+**Utilisation** :
 ```cpp
-// Cu interval specificat
-int random_age = Number_Generator::generate_number<18, 65>();     // vârsta între 18-65
-int random_area = Number_Generator::generate_number<10, 500>(); // suprafața între 10-500
+// Avec intervalle spécifié
+int random_age = Number_Generator::generate_number<18, 65>();     // âge entre 18-65
+int random_area = Number_Generator::generate_number<10, 500>(); // superficie entre 10-500
 
-// Cu interval default [0, 1000]
+// Avec intervalle par défaut [0, 1000]
 int random_value = Number_Generator::generate_number();
 ```
 
-**Avantaje**:
-- Flexibil: permite specificarea intervalului sau folosește default-ul
-- Eficient: seed-ul se inițializează o singură dată
-- Simplu de folosit pentru simularea datelor în teste
-- Distribuție uniformă în intervalul specificat
+**Avantages** :
+- Flexible : permet de spécifier l'intervalle ou utilise celui par défaut
+- Efficace : le seed s'initialise une seule fois
+- Simple à utiliser pour la simulation de données dans les tests
+- Distribution uniforme dans l'intervalle spécifié
 
-## De ce aceste funcționalități înainte de examen?
+## Pourquoi ces fonctionnalités avant l'examen ?
 
-1. **Eficiență**: Elimină timpul petrecut pe implementarea utilitarelor de bază
-2. **Consistență**: Asigură un stil uniform de cod în toată aplicația
-3. **Focus**: Permite concentrarea pe logica de business și conceptele POO importante
-4. **Flexibilitate**: Ușurează modificările și adăugările pe măsură ce apar cerințe noi
-5. **Calitate**: Implementări testate și optimizate pentru performanță
+1. **Efficacité** : Élimine le temps consacré à l'implémentation d'utilitaires de base
+2. **Consistance** : Assure un style de code uniforme dans toute l'application
+3. **Focus** : Permet de se concentrer sur la logique métier et les concepts POO importants
+4. **Flexibilité** : Facilite les modifications et ajouts selon les nouvelles exigences
+5. **Qualité** : Implémentations testées et optimisées pour les performances
 
 ---
 
-## Pași de rezolvare a examenului
+## Étapes de résolution de l'examen
 
-### Pasul 1: Crearea arhitecturii generale a aplicației ✅ COMPLETAT
+### Étape 1 : Création de l'architecture générale de l'application ✅ TERMINÉ
 
-**Obiectiv**: Crearea tuturor claselor cu respectarea ierarhiilor și derivărilor, plus Factory-uri pentru Design Patterns.
+**Objectif** : Création de toutes les classes en respectant les hiérarchies et dérivations, plus les Factory pour les Design Patterns.
 
-**Clase create**:
+**Classes créées** :
 
-#### Interfețe (I_*)
-- `I_Angajat` - interfața pentru angajați
-- `I_Autospeciala` - interfața pentru vehicule speciale  
-- `I_Urgenta` - interfața pentru urgențe
+#### Interfaces (I_*)
+- `I_Angajat` - interface pour les employés
+- `I_Autospeciala` - interface pour les véhicules spéciaux  
+- `I_Urgenta` - interface pour les urgences
 
-#### Factory-uri (Design Pattern)
-- `I_Angajat_Factory` - pentru crearea angajaților
-- `I_Autospeciala_Factory` - pentru crearea vehiculelor
-- `I_Urgenta_Factory` - pentru crearea urgențelor
+#### Factory (Design Pattern)
+- `I_Angajat_Factory` - pour la création des employés
+- `I_Autospeciala_Factory` - pour la création des véhicules
+- `I_Urgenta_Factory` - pour la création des urgences
 
-#### Ierarhia Angajaților
+#### Hiérarchie des Employés
 ```
 I_Angajat
     └── Angajat
@@ -117,7 +117,7 @@ I_Angajat
             └── Sofer
 ```
 
-#### Ierarhia Vehiculelor Speciale
+#### Hiérarchie des Véhicules Spéciaux
 ```
 I_Autospeciala
     └── Autospeciala
@@ -128,7 +128,7 @@ I_Autospeciala
                     └── Autospeciala_Stingere_Spuma
 ```
 
-#### Ierarhia Urgențelor
+#### Hiérarchie des Urgences
 ```
 I_Urgenta
     └── Urgenta
@@ -138,211 +138,211 @@ I_Urgenta
             └── Accident
 ```
 
-#### Clase de Management
-- `Interventie` - pentru gestionarea intervențiilor
-- `Tura` - pentru gestionarea turilor de serviciu
-- `Unitate_Pompieri` - entitatea principală (Singleton)
+#### Classes de Gestion
+- `Interventie` - pour la gestion des interventions
+- `Tura` - pour la gestion des tours de service
+- `Unitate_Pompieri` - entité principale (Singleton)
 
-**Puncte obținute**: 3p (Crearea claselor și arhitectura generală) + 1p (Design Patterns - Factory)
+**Points obtenus** : 3p (Création des classes et architecture générale) + 1p (Design Patterns - Factory)
 
-### Pasul 2: Implementarea membrilor de bază ai claselor ✅ COMPLETAT
+### Étape 2 : Implémentation des membres de base des classes ✅ TERMINÉ
 
-**Obiectiv**: Adăugarea membrilor de bază și metodelor fundamentale pentru fiecare clasă, fără a complica relațiile între clase.
+**Objectif** : Ajout des membres de base et des méthodes fondamentales pour chaque classe, sans compliquer les relations entre classes.
 
-**Principii urmărite**:
-- Fiecare clasă conține doar datele specifice ei
-- Nu se stochează relații complexe între clase (ex: șoferii nu stochează lista de autospeciale)
-- Relațiile vor fi gestionate în `Unitate_Pompieri` pentru cod mai curat
+**Principes suivis** :
+- Chaque classe contient seulement les données qui lui sont spécifiques
+- Pas de stockage de relations complexes entre classes (ex: les conducteurs ne stockent pas la liste des véhicules spéciaux)
+- Les relations seront gérées dans `Unitate_Pompieri` pour un code plus propre
 
-**Implementări realizate**:
+**Implémentations réalisées** :
 
-#### Clasa Angajat
-- `id_unic` - ID generat automat cu `Unique_ID_Generator`
-- `nume` - numele angajatului
-- Constructori: default, cu nume
-- Getters/setters pentru toți membrii
+#### Classe Angajat
+- `id_unic` - ID généré automatiquement avec `Unique_ID_Generator`
+- `nume` - nom de l'employé
+- Constructeurs : par défaut, avec nom
+- Getters/setters pour tous les membres
 
-#### Clasa Autospeciala
-- `id_unic` - ID generat automat
-- Constructor: default
-- Destructor virtual pentru polimorfism
-- Getters/setters pentru ID
+#### Classe Autospeciala
+- `id_unic` - ID généré automatiquement
+- Constructeur : par défaut
+- Destructeur virtuel pour le polymorphisme
+- Getters/setters pour l'ID
 
-#### Clasa Urgenta
-- `adresa` - adresa unde s-a produs urgența
-- `numar_victime` - numărul de victime
-- Constructori: default, cu parametri
-- Getters/setters pentru toți membrii
+#### Classe Urgenta
+- `adresa` - adresse où s'est produite l'urgence
+- `numar_victime` - nombre de victimes
+- Constructeurs : par défaut, avec paramètres
+- Getters/setters pour tous les membres
 
-#### Clase derivate specifice:
+#### Classes dérivées spécifiques :
 
-**Pompier** - moștenește de la Angajat cu membri suplimentari:
-- `numar_interventii` - experiența pompierului
-- Constructori: default, cu nume, cu nume și experiență
+**Pompier** - hérite d'Angajat avec des membres supplémentaires :
+- `numar_interventii` - expérience du pompier
+- Constructeurs : par défaut, avec nom, avec nom et expérience
 
-**Sofer** - moștenește de la Angajat:
+**Sofer** - hérite d'Angajat :
 
-**Autoscara**:
-- `lungime_scara` - lungimea scării în metri
+**Autoscara** :
+- `lungime_scara` - longueur de l'échelle en mètres
 
-**Autospeciala_Descarcerare**:
-- `numar_departatoare` - numărul de depărtătoare hidraulice
-- `numar_foarfece` - numărul de foarfece hidraulice
+**Autospeciala_Descarcerare** :
+- `numar_departatoare` - nombre d'écarteurs hydrauliques
+- `numar_foarfece` - nombre de cisailles hydrauliques
 
-**Incendiu**:
-- `inaltime` - înălțimea incendiului în metri
-- `arie` - suprafața incendiului în metri pătrați
+**Incendiu** :
+- `inaltime` - hauteur de l'incendie en mètres
+- `arie` - superficie de l'incendie en mètres carrés
 
-**Accident**:
-- `numar_vehicule` - numărul de vehicule implicate
+**Accident** :
+- `numar_vehicule` - nombre de véhicules impliqués
 
-**Avantaje ale acestei abordări**:
-1. **Cod curat** - fiecare clasă are responsabilități clare
-2. **Flexibilitate** - relațiile pot fi gestionate centralizat
-3. **Testabilitate** - clasele pot fi testate independent
-4. **Mentenabilitate** - modificările sunt localizate
+**Avantages de cette approche** :
+1. **Code propre** - chaque classe a des responsabilités claires
+2. **Flexibilité** - les relations peuvent être gérées de manière centralisée
+3. **Testabilité** - les classes peuvent être testées indépendamment
+4. **Maintenabilité** - les modifications sont localisées
 
-### Pasul 3: Implementarea interfețelor și Factory Pattern-ului ✅ COMPLETAT
+### Étape 3 : Implémentation des interfaces et du Factory Pattern ✅ TERMINÉ
 
-**Obiectiv**: Implementarea interfețelor cu metode virtuale și Factory Pattern pentru crearea obiectelor.
+**Objectif** : Implémentation des interfaces avec méthodes virtuelles et Factory Pattern pour la création d'objets.
 
-**Implementări realizate**:
+**Implémentations réalisées** :
 
-#### Interfețe cu metode virtuale
-- `I_Angajat` - interfața de bază pentru angajați cu destructor virtual
-- `I_Autospeciala` - interfața de bază pentru vehicule speciale cu destructor virtual  
-- `I_Urgenta` - interfața de bază pentru urgențe cu destructor virtual
+#### Interfaces avec méthodes virtuelles
+- `I_Angajat` - interface de base pour les employés avec destructeur virtuel
+- `I_Autospeciala` - interface de base pour les véhicules spéciaux avec destructeur virtuel  
+- `I_Urgenta` - interface de base pour les urgences avec destructeur virtuel
 
-#### Factory Pattern implementat
+#### Factory Pattern implémenté
 
-**I_Angajat_Factory**:
-- `create_new_Pompier()` - constructor default
-- `create_new_Pompier(const std::string& nume)` - cu nume
-- `create_new_Pompier(const std::string& nume, int numar_interventii)` - cu nume și experiență
-- `create_new_Sofer()` - constructor default
-- `create_new_Sofer(const std::string& nume)` - cu nume
+**I_Angajat_Factory** :
+- `create_new_Pompier()` - constructeur par défaut
+- `create_new_Pompier(const std::string& nume)` - avec nom
+- `create_new_Pompier(const std::string& nume, int numar_interventii)` - avec nom et expérience
+- `create_new_Sofer()` - constructeur par défaut
+- `create_new_Sofer(const std::string& nume)` - avec nom
 
-**I_Autospeciala_Factory**:
-- `create_new_Autoscara()` și `create_new_Autoscara(double lungime_scara)`
-- `create_new_Autospeciala_Descarcerare()` și cu parametri pentru echipamente
-- `create_new_Autospeciala_Stingere_Pulbere()` și cu capacitate material
-- `create_new_Autospeciala_Stingere_Spuma()` și cu capacitate material
+**I_Autospeciala_Factory** :
+- `create_new_Autoscara()` et `create_new_Autoscara(double lungime_scara)`
+- `create_new_Autospeciala_Descarcerare()` et avec paramètres pour équipements
+- `create_new_Autospeciala_Stingere_Pulbere()` et avec capacité matériel
+- `create_new_Autospeciala_Stingere_Spuma()` et avec capacité matériel
 
-**I_Urgenta_Factory**:
-- `create_new_Accident()` cu toate variantele de constructori
-- `create_new_Incendiu_Electric()` cu toate variantele de constructori
-- `create_new_Incendiu_Vegetatie()` cu toate variantele de constructori
+**I_Urgenta_Factory** :
+- `create_new_Accident()` avec toutes les variantes de constructeurs
+- `create_new_Incendiu_Electric()` avec toutes les variantes de constructeurs
+- `create_new_Incendiu_Vegetatie()` avec toutes les variantes de constructeurs
 
-**Avantaje**:
-1. **Polimorfism** - destructorii virtuali permit gestionarea corectă a obiectelor prin pointeri la interfețe
-2. **Factory Pattern** - centralizează crearea obiectelor și ascunde complexitatea
-3. **Flexibilitate** - multiple variante de constructori pentru diferite scenarii
-4. **Encapsulare** - Factory-urile ascund detaliile de implementare
+**Avantages** :
+1. **Polymorphisme** - les destructeurs virtuels permettent la gestion correcte des objets via des pointeurs vers les interfaces
+2. **Factory Pattern** - centralise la création d'objets et cache la complexité
+3. **Flexibilité** - multiples variantes de constructeurs pour différents scénarios
+4. **Encapsulation** - les Factory cachent les détails d'implémentation
 
-**Puncte obținute**: 1p (Interfețe și metode virtuale) + 1p (Design Patterns - Factory)
+**Points obtenus** : 1p (Interfaces et méthodes virtuelles) + 1p (Design Patterns - Factory)
 
-### Pasul 4: Implementarea metodelor virtuale și polimorfismului ✅ COMPLETAT
+### Étape 4 : Implémentation des méthodes virtuelles et du polymorphisme ✅ TERMINÉ
 
-**Obiectiv**: Implementarea metodelor virtuale în interfețe și clasele derivate pentru polimorfism corect.
+**Objectif** : Implémentation des méthodes virtuelles dans les interfaces et classes dérivées pour un polymorphisme correct.
 
-**Implementări realizate**:
+**Implémentations réalisées** :
 
-#### Interfețe cu metode pure virtuale (= 0)
-- `I_Angajat` - toate metodele sunt pure virtuale
-- `I_Autospeciala` - toate metodele sunt pure virtuale  
-- `I_Urgenta` - toate metodele sunt pure virtuale
+#### Interfaces avec méthodes purement virtuelles (= 0)
+- `I_Angajat` - toutes les méthodes sont purement virtuelles
+- `I_Autospeciala` - toutes les méthodes sont purement virtuelles  
+- `I_Urgenta` - toutes les méthodes sont purement virtuelles
 
-#### Clase de bază cu implementări și excepții
-**Angajat**:
-- Implementează metodele comune (`get_id`, `get_nume`, `set_id`, `set_nume`)
-- Aruncă `Wrong_Angajat_Type` pentru metodele specifice pompierilor (`get_numar_interventii`)
+#### Classes de base avec implémentations et exceptions
+**Angajat** :
+- Implémente les méthodes communes (`get_id`, `get_nume`, `set_id`, `set_nume`)
+- Lance `Wrong_Angajat_Type` pour les méthodes spécifiques aux pompiers (`get_numar_interventii`)
 
-**Autospeciala**:
-- Implementează metodele comune (`get_id`, `set_id`)
-- Aruncă `Wrong_Autospeciala_Type` pentru metodele specifice fiecărui tip de vehicul
+**Autospeciala** :
+- Implémente les méthodes communes (`get_id`, `set_id`)
+- Lance `Wrong_Autospeciala_Type` pour les méthodes spécifiques à chaque type de véhicule
 
-**Urgenta**:
-- Implementează metodele comune (`get_adresa`, `get_numar_victime`, `set_adresa`, `set_numar_victime`)
-- Aruncă `Wrong_Urgenta_Type` pentru metodele specifice fiecărui tip de urgență
+**Urgenta** :
+- Implémente les méthodes communes (`get_adresa`, `get_numar_victime`, `set_adresa`, `set_numar_victime`)
+- Lance `Wrong_Urgenta_Type` pour les méthodes spécifiques à chaque type d'urgence
 
-#### Clase derivate cu override
-**Pompier**:
-- Override pentru `get_numar_interventii()` și `set_numar_interventii()`
+#### Classes dérivées avec override
+**Pompier** :
+- Override pour `get_numar_interventii()` et `set_numar_interventii()`
 
-**Accident**:
-- Override pentru `get_numar_vehicule()` și `set_numar_vehicule()`
+**Accident** :
+- Override pour `get_numar_vehicule()` et `set_numar_vehicule()`
 
-**Incendiu**:
-- Override pentru `get_inaltime()`, `get_arie()`, `set_inaltime()`, `set_arie()`
+**Incendiu** :
+- Override pour `get_inaltime()`, `get_arie()`, `set_inaltime()`, `set_arie()`
 
-#### Excepții definite
+#### Exceptions définies
 ```cpp
 DEFINE_EXCEPTION(Wrong_Angajat_Type, 1001);
 DEFINE_EXCEPTION(Wrong_Autospeciala_Type, 1002);
 DEFINE_EXCEPTION(Wrong_Urgenta_Type, 1003);
 ```
 
-**Avantaje**:
-1. **Polimorfism corect** - metodele virtuale permit gestionarea obiectelor prin pointeri la interfețe
-2. **Type safety** - excepțiile previne accesarea metodelor greșite
-3. **Extensibilitate** - ușor de adăugat noi tipuri de obiecte
-4. **Encapsulare** - fiecare clasă implementează doar metodele relevante
+**Avantages** :
+1. **Polymorphisme correct** - les méthodes virtuelles permettent la gestion des objets via des pointeurs vers les interfaces
+2. **Type safety** - les exceptions préviennent l'accès aux mauvaises méthodes
+3. **Extensibilité** - facile d'ajouter de nouveaux types d'objets
+4. **Encapsulation** - chaque classe implémente seulement les méthodes pertinentes
 
-**Puncte obținute**: 1p (Interfețe și metode virtuale) - consolidat
+**Points obtenus** : 1p (Interfaces et méthodes virtuelles) - consolidé
 
-### Pasul 5: Implementarea structurii de date în Unitate_Pompieri ✅ COMPLETAT
+### Étape 5 : Implémentation de la structure de données dans Unitate_Pompieri ✅ TERMINÉ
 
-**Obiectiv**: Crearea structurii de date centralizate pentru gestionarea tuturor obiectelor din aplicație.
+**Objectif** : Création de la structure de données centralisée pour la gestion de tous les objets de l'application.
 
-**Implementări realizate**:
+**Implémentations réalisées** :
 
-#### Structura de date în Unitate_Pompieri
+#### Structure de données dans Unitate_Pompieri
 ```cpp
 private:
-    std::map<int, I_Angajat*> angajati;           // id -> angajat
-    std::map<int, I_Autospeciala*> autospeciale;  // id -> vehicul
-    std::map<int, Interventie*> interventii;      // id -> intervenție
-    std::vector<I_Urgenta*> urgente;              // urgențe active
+    std::map<int, I_Angajat*> angajati;           // id -> employé
+    std::map<int, I_Autospeciala*> autospeciale;  // id -> véhicule
+    std::map<int, Interventie*> interventii;      // id -> intervention
+    std::vector<I_Urgenta*> urgente;              // urgences actives
     
-    std::vector<std::pair<int, int>> soferi_autospeciale; // experiența șoferilor
+    std::vector<std::pair<int, int>> soferi_autospeciale; // expérience des conducteurs
 ```
 
-#### Metode de management
-- `add_angajat(I_Angajat* angajat)` - adaugă angajat în map
-- `add_autospeciala(I_Autospeciala* autospeciala)` - adaugă vehicul în map
-- `add_interventie(Interventie* interventie)` - adaugă intervenție în map
-- `add_urgenta(I_Urgenta* urgenta)` - adaugă urgență în vector
+#### Méthodes de gestion
+- `add_angajat(I_Angajat* angajat)` - ajoute employé dans map
+- `add_autospeciala(I_Autospeciala* autospeciala)` - ajoute véhicule dans map
+- `add_interventie(Interventie* interventie)` - ajoute intervention dans map
+- `add_urgenta(I_Urgenta* urgenta)` - ajoute urgence dans vector
 
-#### Auto-inserare în constructori
-**Pompier**:
-- Toți constructorii apelează `Unitate_Pompieri::get_instance().add_angajat(this)`
-- Angajatul se înregistrează automat la creare
+#### Auto-insertion dans les constructeurs
+**Pompier** :
+- Tous les constructeurs appellent `Unitate_Pompieri::get_instance().add_angajat(this)`
+- L'employé s'enregistre automatiquement à la création
 
-**Sofer**:
-- Toți constructorii apelează `Unitate_Pompieri::get_instance().add_angajat(this)`
-- Șoferul se înregistrează automat la creare
+**Sofer** :
+- Tous les constructeurs appellent `Unitate_Pompieri::get_instance().add_angajat(this)`
+- Le conducteur s'enregistre automatiquement à la création
 
-**Autospeciala**:
-- Constructorul generează ID automat cu `Unique_ID_Generator`
-- ID-ul este atribuit automat la creare
+**Autospeciala** :
+- Le constructeur génère l'ID automatiquement avec `Unique_ID_Generator`
+- L'ID est attribué automatiquement à la création
 
-**Avantaje**:
-1. **Centralizare** - toate obiectele sunt gestionate într-un singur loc
-2. **Auto-registrare** - obiectele se înregistrează automat la creare
-3. **Căutări rapide** - prin ID în maps
-4. **Singleton Pattern** - o singură instanță pentru toată aplicația
-5. **Experiență șoferi** - stocată în `soferi_autospeciale` pentru verificări ulterioare
+**Avantages** :
+1. **Centralisation** - tous les objets sont gérés en un seul endroit
+2. **Auto-enregistrement** - les objets s'enregistrent automatiquement à la création
+3. **Recherches rapides** - par ID dans les maps
+4. **Singleton Pattern** - une seule instance pour toute l'application
+5. **Expérience conducteurs** - stockée dans `soferi_autospeciale` pour vérifications ultérieures
 
-### Pasul 6: Implementarea calculului resurselor necesare ✅ COMPLETAT
+### Étape 6 : Implémentation du calcul des ressources nécessaires ✅ TERMINÉ
 
-**Obiectiv**: Calculul automat al resurselor necesare pentru fiecare tip de urgență în clasa de bază `Urgenta`.
+**Objectif** : Calcul automatique des ressources nécessaires pour chaque type d'urgence dans la classe de base `Urgenta`.
 
-**Implementări realizate**:
+**Implémentations réalisées** :
 
-#### Membri pentru resurse în clasa Urgenta
+#### Membres pour ressources dans la classe Urgenta
 ```cpp
 protected:
-    // Resursele necesare pentru intervenție
+    // Ressources nécessaires pour l'intervention
     int numar_departatoare_necesare = 0;
     int numar_foarfece_necesare = 0;
     double pulbere_necesara = 0.0;
@@ -351,249 +351,249 @@ protected:
     int numar_pompieri_necesari = 0;
 ```
 
-#### Calculul resurselor în constructori
+#### Calcul des ressources dans les constructeurs
 
-**Accident**:
+**Accident** :
 - `numar_departatoare_necesare = numar_vehicule - 1`
 - `numar_foarfece_necesare = 1`
-- `spuma_necesara = 0` (implicit, nu este necesară)
+- `spuma_necesara = 0` (implicite, n'est pas nécessaire)
 
-**Incendiu_Electric**:
+**Incendiu_Electric** :
 - `pulbere_necesara = arie / 20.0`
-- `numar_departatoare_necesare = 0` (implicit, nu sunt necesare)
+- `numar_departatoare_necesare = 0` (implicite, ne sont pas nécessaires)
 
-**Incendiu_Vegetatie**:
+**Incendiu_Vegetatie** :
 - `spuma_necesara = arie / 15.0`
-- `numar_departatoare_necesare = 0` (implicit, nu sunt necesare)
+- `numar_departatoare_necesare = 0` (implicite, ne sont pas nécessaires)
 
-**Incendiu** (clasa de bază):
+**Incendiu** (classe de base) :
 - `autoscari_necesare = (inaltime > 2) ? (1 + numar_victime / 20) : 0`
 - `numar_pompieri_necesari = (inaltime > 10) ? (1 + arie / 20.0) : (1 + arie / 25.0)`
 
-#### Metode de acces implementate
-**În I_Urgenta** (interfața):
-- Toate metodele sunt pure virtuale (`= 0`)
-- Getters și setters pentru toate resursele necesare
+#### Méthodes d'accès implémentées
+**Dans I_Urgenta** (interface) :
+- Toutes les méthodes sont purement virtuelles (`= 0`)
+- Getters et setters pour toutes les ressources nécessaires
 
-**În Urgenta** (clasa de bază):
-- Implementări cu `override` pentru toate metodele
-- Returnează valorile membrilor protejați
-- Setters pentru modificarea valorilor
+**Dans Urgenta** (classe de base) :
+- Implémentations avec `override` pour toutes les méthodes
+- Retourne les valeurs des membres protégés
+- Setters pour modifier les valeurs
 
-#### Avantaje ale acestei abordări:
-1. **Centralizare** - toate resursele sunt în clasa de bază
-2. **Valori implicite** - resursele neaplicabile rămân 0
-3. **Calcul automat** - resursele se calculează la crearea urgenței
-4. **Flexibilitate** - ușor de adăugat noi tipuri de resurse
-5. **Consistență** - toate urgențele au aceeași structură de resurse
-6. **Acces complet** - getters și setters pentru toate resursele
+#### Avantages de cette approche :
+1. **Centralisation** - toutes les ressources sont dans la classe de base
+2. **Valeurs par défaut** - les ressources non applicables restent à 0
+3. **Calcul automatique** - les ressources se calculent à la création de l'urgence
+4. **Flexibilité** - facile d'ajouter de nouveaux types de ressources
+5. **Consistance** - toutes les urgences ont la même structure de ressources
+6. **Accès complet** - getters et setters pour toutes les ressources
 
-### Pasul 7: Implementarea logicii de mutare a resurselor ✅ COMPLETAT
+### Étape 7 : Implémentation de la logique de déplacement des ressources ✅ TERMINÉ
 
-**Obiectiv**: Implementarea funcționalității de mutare a resurselor din tură în intervenție și înapoi.
+**Objectif** : Implémentation de la fonctionnalité de déplacement des ressources du tour vers l'intervention et retour.
 
-**Implementări realizate**:
+**Implémentations réalisées** :
 
-#### Modificarea clasei Interventie
-- **Eliminat**: membrii pentru resursele necesare (acum se accesează prin `urgenta_declansatoare`)
-- **Adăugat**: vectori pentru resursele mobilizate efectiv
-- **Adăugat**: metode pentru mobilizarea și returnarea resurselor
-- **Adăugat**: flag `activa` pentru starea intervenției
+#### Modification de la classe Interventie
+- **Supprimé** : membres pour les ressources nécessaires (maintenant accessibles via `urgenta_declansatoare`)
+- **Ajouté** : vecteurs pour les ressources effectivement mobilisées
+- **Ajouté** : méthodes pour la mobilisation et le retour des ressources
+- **Ajouté** : flag `activa` pour l'état de l'intervention
 
-#### Metode în Tura pentru mutarea resurselor
-- `muta_pompieri(int numar_necesar)` - mută pompierii din tură
-- `muta_soferi_pentru_autospeciale()` - mută șoferii pentru vehicule
-- `muta_autoscara()` - mută o autoscara
-- `muta_autospeciale_descarcerare()` - mută autospeciale de descarcerare
-- `muta_autospeciale_stingere_pulbere()` - mută autospeciale cu pulbere
-- `muta_autospeciale_stingere_spuma()` - mută autospeciale cu spumă
+#### Méthodes dans Tura pour le déplacement des ressources
+- `muta_pompieri(int numar_necesar)` - déplace les pompiers du tour
+- `muta_soferi_pentru_autospeciale()` - déplace les conducteurs pour les véhicules
+- `muta_autoscara()` - déplace une échelle
+- `muta_autospeciale_descarcerare()` - déplace les véhicules de désincarcération
+- `muta_autospeciale_stingere_pulbere()` - déplace les véhicules à poudre
+- `muta_autospeciale_stingere_spuma()` - déplace les véhicules à mousse
 
-#### Metode în Tura pentru returnarea resurselor
+#### Méthodes dans Tura pour le retour des ressources
 - `returneaza_pompier()`, `returneaza_sofer()`, `returneaza_autoscara()`, etc.
-- Resursele se returnează în containerele corespunzătoare
+- Les ressources sont retournées dans les conteneurs correspondants
 
-#### Metoda principală în Unitate_Pompieri
-- `mobilizeaza_resurse_pentru_urgenta(I_Urgenta* urgenta)` - mobilizează toate resursele necesare
-- `returneaza_resurse_din_interventie(Interventie* interventie)` - returnează resursele în tură
+#### Méthode principale dans Unitate_Pompieri
+- `mobilizeaza_resurse_pentru_urgenta(I_Urgenta* urgenta)` - mobilise toutes les ressources nécessaires
+- `returneaza_resurse_din_interventie(Interventie* interventie)` - retourne les ressources au tour
 
-#### Excepții adăugate
-- `InsufficientFirefightersException` - pompieri insuficienți
-- `InsufficientVehiclesException` - vehicule insuficiente
-- `NoSuitableDriverException` - șofer potrivit lipsă
+#### Exceptions ajoutées
+- `InsufficientFirefightersException` - pompiers insuffisants
+- `InsufficientVehiclesException` - véhicules insuffisants
+- `NoSuitableDriverException` - conducteur approprié manquant
 
-#### Logica de mobilizare
-1. **Verifică disponibilitatea** resurselor în tură
-2. **Mută resursele** din tură în intervenție (nu clonare!)
-3. **Mobilizează resursele** în intervenție
-4. **Adaugă intervenția** în Unitate_Pompieri
-5. **Returnează resursele** la finalizarea intervenției
+#### Logique de mobilisation
+1. **Vérifie la disponibilité** des ressources dans le tour
+2. **Déplace les ressources** du tour vers l'intervention (pas de clonage !)
+3. **Mobilise les ressources** dans l'intervention
+4. **Ajoute l'intervention** dans Unitate_Pompieri
+5. **Retourne les ressources** à la finalisation de l'intervention
 
-**Avantaje**:
-1. **Mutare, nu clonare** - resursele se mută efectiv din tură în intervenție
-2. **Verificări complete** - disponibilitate, cantități, echipamente
-3. **Gestionare centralizată** - toate operațiunile prin Unitate_Pompieri
-4. **Flexibilitate** - ușor de adăugat noi tipuri de resurse
-5. **Evidență completă** - resursele rămân în evidență după finalizare
+**Avantages** :
+1. **Déplacement, pas clonage** - les ressources se déplacent effectivement du tour vers l'intervention
+2. **Vérifications complètes** - disponibilité, quantités, équipements
+3. **Gestion centralisée** - toutes les opérations via Unitate_Pompieri
+4. **Flexibilité** - facile d'ajouter de nouveaux types de ressources
+5. **Registre complet** - les ressources restent en registre après finalisation
 
-### Pasul 8: Implementarea supraîncărcării operatorului ++ ✅ COMPLETAT
+### Étape 8 : Implémentation de la surcharge de l'opérateur ++ ✅ TERMINÉ
 
-**Obiectiv**: Supraîncărcarea operatorului ++ pentru incrementarea experienței pompierilor după fiecare intervenție.
+**Objectif** : Surcharge de l'opérateur ++ pour incrémenter l'expérience des pompiers après chaque intervention.
 
-**Implementări realizate**:
+**Implémentations réalisées** :
 
-#### Supraîncărcarea operatorului ++ în clasa Pompier
+#### Surcharge de l'opérateur ++ dans la classe Pompier
 ```cpp
-// Pre-increment (++pompier)
+// Pré-incrément (++pompier)
 Pompier& operator++();
 
-// Post-increment (pompier++)
+// Post-incrément (pompier++)
 Pompier operator++(int);
 ```
 
-#### Implementarea operatorilor
-- **Pre-increment**: incrementează `numar_interventii` și returnează referința la obiect
-- **Post-increment**: incrementează `numar_interventii` și returnează o copie a valorii anterioare
+#### Implémentation des opérateurs
+- **Pré-incrément** : incrémente `numar_interventii` et retourne la référence à l'objet
+- **Post-incrément** : incrémente `numar_interventii` et retourne une copie de la valeur précédente
 
-#### Integrarea în logica de returnare a resurselor
-- La finalizarea unei intervenții, experiența pompierilor se incrementează automat
-- Se folosește `dynamic_cast` pentru a verifica dacă angajatul este Pompier
-- Se aplică operatorul `++(*pompier)` pentru fiecare pompier mobilizat
+#### Intégration dans la logique de retour des ressources
+- À la finalisation d'une intervention, l'expérience des pompiers s'incrémente automatiquement
+- Utilise `dynamic_cast` pour vérifier si l'employé est un Pompier
+- Applique l'opérateur `++(*pompier)` pour chaque pompier mobilisé
 
-#### Exemplu de utilizare
+#### Exemple d'utilisation
 ```cpp
-Pompier pompier("Ion", 5);  // 5 intervenții
-++pompier;                  // acum are 6 intervenții
-pompier++;                  // acum are 7 intervenții, returnează valoarea 6
+Pompier pompier("Ion", 5);  // 5 interventions
+++pompier;                  // maintenant a 6 interventions
+pompier++;                  // maintenant a 7 interventions, retourne la valeur 6
 ```
 
-**Avantaje**:
-1. **Sintaxă naturală** - folosește operatorul ++ standard
-2. **Automatizare** - experiența se incrementează automat la finalizarea intervențiilor
-3. **Flexibilitate** - suportă atât pre-increment cât și post-increment
-4. **Integrare** - se integrează perfect în logica existentă
+**Avantages** :
+1. **Syntaxe naturelle** - utilise l'opérateur ++ standard
+2. **Automatisation** - l'expérience s'incrémente automatiquement à la finalisation des interventions
+3. **Flexibilité** - supporte tant le pré-incrément que le post-incrément
+4. **Intégration** - s'intègre parfaitement dans la logique existante
 
-**Puncte obținute**: 1p (Supraîncărcarea operatorului ++)
+**Points obtenus** : 1p (Surcharge de l'opérateur ++)
 
-### Pasul 9: Implementarea încărcării datelor din fișier ✅ COMPLETAT
+### Étape 9 : Implémentation du chargement des données depuis un fichier ✅ TERMINÉ
 
-**Obiectiv**: Implementarea funcționalității de încărcare a angajaților și autospecialelor din fișier pentru popularea unității.
+**Objectif** : Implémentation de la fonctionnalité de chargement des employés et véhicules spéciaux depuis un fichier pour peupler l'unité.
 
-**Implementări realizate**:
+**Implémentations réalisées** :
 
-#### Fișierul de date Unitate_Pompieri.txt
+#### Fichier de données Unitate_Pompieri.txt
 ```
-# Format: tip_obiect|parametri_separati_prin_virgula
+# Format: type_objet|parametres_separes_par_virgule
 
-# Pompieri
+# Pompiers
 Pompier|Ion Popescu,10
 Pompier|Maria Ionescu,5
 
-# Șoferi
+# Conducteurs
 Sofer|Vasile Petrescu
 Sofer|Elena Georgescu
 
-# Autoscari
+# Échelles
 Autoscara|25.5
 Autoscara|30.0
 
-# Autospeciale de descarcerare
+# Véhicules spéciaux de désincarcération
 Autospeciala_Descarcerare|2,1
 Autospeciala_Descarcerare|3,2
 
-# Autospeciale de stingere cu pulbere
+# Véhicules spéciaux d'extinction à poudre
 Autospeciala_Stingere_Pulbere|500.0
 Autospeciala_Stingere_Pulbere|750.0
 
-# Autospeciale de stingere cu spumă
+# Véhicules spéciaux d'extinction à mousse
 Autospeciala_Stingere_Spuma|400.0
 Autospeciala_Stingere_Spuma|600.0
 ```
 
-#### Metode implementate în Unitate_Pompieri
-- `incarca_date_din_fisier(const std::string& nume_fisier)` - încarcă datele din fișier
-- `proceseaza_linie_fisier(const std::string& linie)` - procesează fiecare linie din fișier
+#### Méthodes implémentées dans Unitate_Pompieri
+- `incarca_date_din_fisier(const std::string& nume_fisier)` - charge les données depuis le fichier
+- `proceseaza_linie_fisier(const std::string& linie)` - traite chaque ligne du fichier
 
-#### Logica de procesare
-1. **Deschide fișierul** și verifică dacă s-a deschis corect
-2. **Citește linie cu linie** și ignoră comentariile (#) și liniile goale
-3. **Parsează fiecare linie** folosind separatorul `|`
-4. **Creează obiectele** în funcție de tipul specificat
-5. **Adaugă obiectele** în unitatea de pompieri
+#### Logique de traitement
+1. **Ouvre le fichier** et vérifie s'il s'est ouvert correctement
+2. **Lit ligne par ligne** et ignore les commentaires (#) et les lignes vides
+3. **Parse chaque ligne** en utilisant le séparateur `|`
+4. **Crée les objets** selon le type spécifié
+5. **Ajoute les objets** dans l'unité de pompiers
 
-#### Tipuri de obiecte suportate
-- **Pompier**: `Pompier|nume,numar_interventii`
-- **Sofer**: `Sofer|nume`
-- **Autoscara**: `Autoscara|lungime_scara`
-- **Autospeciala_Descarcerare**: `Autospeciala_Descarcerare|departatoare,foarfece`
-- **Autospeciala_Stingere_Pulbere**: `Autospeciala_Stingere_Pulbere|capacitate`
-- **Autospeciala_Stingere_Spuma**: `Autospeciala_Stingere_Spuma|capacitate`
+#### Types d'objets supportés
+- **Pompier** : `Pompier|nom,nombre_interventions`
+- **Sofer** : `Sofer|nom`
+- **Autoscara** : `Autoscara|longueur_echelle`
+- **Autospeciala_Descarcerare** : `Autospeciala_Descarcerare|ecarteurs,cisailles`
+- **Autospeciala_Stingere_Pulbere** : `Autospeciala_Stingere_Pulbere|capacite`
+- **Autospeciala_Stingere_Spuma** : `Autospeciala_Stingere_Spuma|capacite`
 
-#### Tratarea erorilor
-- Verifică dacă fișierul s-a deschis corect
-- Ignoră liniile invalide sau goale
-- Elimină spațiile în plus din parametri
-- Folosește `std::stoi()` și `std::stod()` pentru conversii sigure
+#### Traitement des erreurs
+- Vérifie si le fichier s'est ouvert correctement
+- Ignore les lignes invalides ou vides
+- Élimine les espaces en trop des paramètres
+- Utilise `std::stoi()` et `std::stod()` pour des conversions sûres
 
-**Avantaje**:
-1. **Flexibilitate** - ușor de modificat datele prin editarea fișierului
-2. **Separarea datelor** - datele sunt separate de codul aplicației
-3. **Reutilizare** - același fișier poate fi folosit pentru teste diferite
-4. **Extensibilitate** - ușor de adăugat noi tipuri de obiecte
-5. **Robustețe** - tratarea erorilor și validarea datelor
+**Avantages** :
+1. **Flexibilité** - facile de modifier les données en éditant le fichier
+2. **Séparation des données** - les données sont séparées du code de l'application
+3. **Réutilisation** - le même fichier peut être utilisé pour différents tests
+4. **Extensibilité** - facile d'ajouter de nouveaux types d'objets
+5. **Robustesse** - traitement des erreurs et validation des données
 
-**Puncte obținute**: 1p (Încărcarea datelor din fișiere)
+**Points obtenus** : 1p (Chargement des données depuis des fichiers)
 
-### Pasul 10: Implementarea funcției main și testarea completă ✅ COMPLETAT
+### Étape 10 : Implémentation de la fonction main et test complet ✅ TERMINÉ
 
-**Obiectiv**: Crearea unei funcții main complete care demonstrează toate funcționalitățile implementate.
+**Objectif** : Création d'une fonction main complète qui démontre toutes les fonctionnalités implémentées.
 
-**Implementări realizate**:
+**Implémentations réalisées** :
 
-#### Funcția main completă
+#### Fonction main complète
 ```cpp
 int main() {
-    // 1. Încărcarea datelor din fișier
-    // 2. Popularea turii cu resurse
-    // 3. Crearea urgențelor pentru testare
-    // 4. Mobilizarea resurselor pentru accident
-    // 5. Mobilizarea resurselor pentru incendiu
-    // 6. Demonstrarea operatorului ++
-    // 7. Finalizarea intervențiilor
-    // 8. Testarea tratării excepțiilor
+    // 1. Chargement des données depuis le fichier
+    // 2. Population du tour avec des ressources
+    // 3. Création d'urgences pour les tests
+    // 4. Mobilisation des ressources pour l'accident
+    // 5. Mobilisation des ressources pour l'incendie
+    // 6. Démonstration de l'opérateur ++
+    // 7. Finalisation des interventions
+    // 8. Test de la gestion des exceptions
 }
 ```
 
-#### Funcționalități demonstrate
-1. **Încărcarea datelor din fișier** - folosește `incarca_date_din_fisier()`
-2. **Popularea turii** - adaugă manual pompieri, șoferi și autospeciale
-3. **Crearea urgențelor** - folosește Factory Pattern pentru diferite tipuri
-4. **Mobilizarea resurselor** - demonstrează mutarea din tură în intervenție
-5. **Supraîncărcarea operatorului ++** - incrementează experiența pompierilor
-6. **Returnarea resurselor** - finalizează intervențiile și returnează resursele
-7. **Tratarea excepțiilor** - demonstrează gestionarea erorilor
+#### Fonctionnalités démontrées
+1. **Chargement des données depuis le fichier** - utilise `incarca_date_din_fisier()`
+2. **Population du tour** - ajoute manuellement pompiers, conducteurs et véhicules spéciaux
+3. **Création d'urgences** - utilise Factory Pattern pour différents types
+4. **Mobilisation des ressources** - démontre le déplacement du tour vers l'intervention
+5. **Surcharge de l'opérateur ++** - incrémente l'expérience des pompiers
+6. **Retour des ressources** - finalise les interventions et retourne les ressources
+7. **Gestion des exceptions** - démontre la gestion des erreurs
 
-#### Tipuri de urgențe testate
-- **Accident rutier** - cu 3 vehicule implicate
-- **Incendiu de vegetație** - cu înălțime 5m și arie 100m²
-- **Incendiu electric** - cu înălțime 15m și arie 200m²
-- **Incendiu mare** - pentru testarea excepțiilor
+#### Types d'urgences testés
+- **Accident routier** - avec 3 véhicules impliqués
+- **Incendie de végétation** - avec hauteur 5m et superficie 100m²
+- **Incendie électrique** - avec hauteur 15m et superficie 200m²
+- **Grand incendie** - pour tester les exceptions
 
-#### Output-ul programului
-Programul afișează:
-- Progresul fiecărui pas
-- Detalii despre urgențele create
-- Numărul de resurse mobilizate
-- Experiența pompierilor înainte și după intervenție
-- Mesaje de succes pentru fiecare operațiune
-- Tratarea excepțiilor când apar
+#### Sortie du programme
+Le programme affiche :
+- Le progrès de chaque étape
+- Détails sur les urgences créées
+- Nombre de ressources mobilisées
+- Expérience des pompiers avant et après intervention
+- Messages de succès pour chaque opération
+- Gestion des exceptions quand elles surviennent
 
-**Avantaje**:
-1. **Demonstrație completă** - testează toate funcționalitățile
-2. **Output informativ** - afișează progresul și rezultatele
-3. **Tratarea erorilor** - demonstrează gestionarea excepțiilor
-4. **Realism** - simulează scenarii reale de intervenție
-5. **Ușurință de înțelegere** - pașii sunt clari și logici
+**Avantages** :
+1. **Démonstration complète** - teste toutes les fonctionnalités
+2. **Sortie informative** - affiche le progrès et les résultats
+3. **Gestion des erreurs** - démontre la gestion des exceptions
+4. **Réalisme** - simule des scénarios réels d'intervention
+5. **Facilité de compréhension** - les étapes sont claires et logiques
 
-**Puncte obținute**: Demonstrația completă a tuturor funcționalităților
+**Points obtenus** : Démonstration complète de toutes les fonctionnalités
 
-**REZULTAT FINAL**: Aplicația este completă și funcțională! 🎉
+**RÉSULTAT FINAL** : L'application est complète et fonctionnelle ! 🎉
