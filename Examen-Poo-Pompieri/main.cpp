@@ -17,132 +17,132 @@
 int main()
 {
     try {
-        std::cout << "=== UNITATEA DE POMPIERI - DEMONSTRAȚIE ===\n\n";
+        std::cout << "=== UNITÉ DE POMPIERS - DÉMONSTRATION ===\n\n";
 
-        // Obține instanța unității de pompieri
+        // Obtient l'instance de l'unité de pompiers
         Unitate_Pompieri& unitate = Unitate_Pompieri::get_instance();
         
-        // Încarcă datele din fișier
-        std::cout << "1. Încărcarea datelor din fișier...\n";
+        // Charge les données depuis le fichier
+        std::cout << "1. Chargement des données depuis le fichier...\n";
         unitate.incarca_date_din_fisier("Unitate_Pompieri.txt");
-        std::cout << "   ✓ Datele au fost încărcate cu succes!\n\n";
+        std::cout << "   ✓ Les données ont été chargées avec succès !\n\n";
 
-        // Obține instanța turii și adaugă resurse manual
+        // Obtient l'instance du tour et ajoute des ressources manuellement
         Tura& tura = Tura::get_instance();
         
-        // Adaugă pompieri în tură (din unitate)
-        std::cout << "2. Popularea turii cu resurse...\n";
+        // Ajoute des pompiers au tour (depuis l'unité)
+        std::cout << "2. Population du tour avec des ressources...\n";
         
-        // Pentru demonstrație, adăugăm primii 3 pompieri și primii 2 șoferi
-        // În realitate, ai putea avea o logică mai complexă pentru selectarea resurselor
+        // Pour la démonstration, nous ajoutons les 3 premiers pompiers et les 2 premiers conducteurs
+        // En réalité, vous pourriez avoir une logique plus complexe pour la sélection des ressources
         
-        // Adaugă pompieri în tură
+        // Ajoute des pompiers au tour
         tura.add_pompier(new Pompier("Ion Popescu", 10));
         tura.add_pompier(new Pompier("Maria Ionescu", 5));
         tura.add_pompier(new Pompier("Gheorghe Dumitrescu", 15));
         
-        // Adaugă șoferi în tură
+        // Ajoute des conducteurs au tour
         tura.add_sofer(new Sofer("Vasile Petrescu"));
         tura.add_sofer(new Sofer("Elena Georgescu"));
         
-        // Adaugă autospeciale în tură
+        // Ajoute des véhicules spéciaux au tour
         tura.add_autoscara(new Autoscara(25.5));
         tura.add_autospeciala_descarcerare(new Autospeciala_Descarcerare(2, 1));
         tura.add_autospeciala_stingere_pulbere(new Autospeciala_Stingere_Pulbere(500.0));
         tura.add_autospeciala_stingere_spuma(new Autospeciala_Stingere_Spuma(400.0));
         
-        std::cout << "   ✓ Tura a fost populată cu resurse!\n\n";
+        std::cout << "   ✓ Le tour a été populé avec des ressources !\n\n";
 
-        // Creează urgențe pentru testare
-        std::cout << "3. Crearea urgențelor pentru testare...\n";
+        // Crée des urgences pour les tests
+        std::cout << "3. Création d'urgences pour les tests...\n";
         
         I_Urgenta_Factory factory_urgente;
         
-        // Accident rutier
-        I_Urgenta* accident = factory_urgente.create_new_Accident("Strada Principală, nr. 15", 2, 3);
-        std::cout << "   ✓ Accident creat: " << accident->get_adresa() 
-                  << " - " << accident->get_numar_victime() << " victime, " 
-                  << accident->get_numar_vehicule() << " vehicule\n";
+        // Accident routier
+        I_Urgenta* accident = factory_urgente.create_new_Accident("Rue Principale, n° 15", 2, 3);
+        std::cout << "   ✓ Accident créé : " << accident->get_adresa() 
+                  << " - " << accident->get_numar_victime() << " victimes, " 
+                  << accident->get_numar_vehicule() << " véhicules\n";
         
-        // Incendiu de vegetație
-        I_Urgenta* incendiu_veg = factory_urgente.create_new_Incendiu_Vegetatie("Pădurea Comunală", 0, 5, 100.0);
-        std::cout << "   ✓ Incendiu de vegetație creat: " << incendiu_veg->get_adresa() 
-                  << " - înălțime: " << incendiu_veg->get_inaltime() << "m, "
-                  << "arie: " << incendiu_veg->get_arie() << "m²\n";
+        // Incendie de végétation
+        I_Urgenta* incendiu_veg = factory_urgente.create_new_Incendiu_Vegetatie("Forêt Communale", 0, 5, 100.0);
+        std::cout << "   ✓ Incendie de végétation créé : " << incendiu_veg->get_adresa() 
+                  << " - hauteur : " << incendiu_veg->get_inaltime() << "m, "
+                  << "superficie : " << incendiu_veg->get_arie() << "m²\n";
         
-        // Incendiu electric
-        I_Urgenta* incendiu_el = factory_urgente.create_new_Incendiu_Electric("Fabrica ABC", 1, 15, 200.0);
-        std::cout << "   ✓ Incendiu electric creat: " << incendiu_el->get_adresa() 
-                  << " - înălțime: " << incendiu_el->get_inaltime() << "m, "
-                  << "arie: " << incendiu_el->get_arie() << "m²\n\n";
+        // Incendie électrique
+        I_Urgenta* incendiu_el = factory_urgente.create_new_Incendiu_Electric("Usine ABC", 1, 15, 200.0);
+        std::cout << "   ✓ Incendie électrique créé : " << incendiu_el->get_adresa() 
+                  << " - hauteur : " << incendiu_el->get_inaltime() << "m, "
+                  << "superficie : " << incendiu_el->get_arie() << "m²\n\n";
 
-        // Demonstrează mobilizarea resurselor
-        std::cout << "4. Mobilizarea resurselor pentru accident...\n";
+        // Démontre la mobilisation des ressources
+        std::cout << "4. Mobilisation des ressources pour l'accident...\n";
         Interventie* interventie_accident = unitate.mobilizeaza_resurse_pentru_urgenta(accident);
-        std::cout << "   ✓ Intervenție creată cu ID: " << interventie_accident->get_id() << "\n";
-        std::cout << "   ✓ Pompieri mobilizați: " << interventie_accident->get_pompieri_mobilizati().size() << "\n";
-        std::cout << "   ✓ Șoferi mobilizați: " << interventie_accident->get_soferi_mobilizati().size() << "\n";
-        std::cout << "   ✓ Autospeciale mobilizate: " << interventie_accident->get_autospeciale_mobilizate().size() << "\n\n";
+        std::cout << "   ✓ Intervention créée avec ID : " << interventie_accident->get_id() << "\n";
+        std::cout << "   ✓ Pompiers mobilisés : " << interventie_accident->get_pompieri_mobilizati().size() << "\n";
+        std::cout << "   ✓ Conducteurs mobilisés : " << interventie_accident->get_soferi_mobilizati().size() << "\n";
+        std::cout << "   ✓ Véhicules spéciaux mobilisés : " << interventie_accident->get_autospeciale_mobilizate().size() << "\n\n";
 
-        // Demonstrează mobilizarea pentru incendiu
-        std::cout << "5. Mobilizarea resurselor pentru incendiu de vegetație...\n";
+        // Démontre la mobilisation pour l'incendie
+        std::cout << "5. Mobilisation des ressources pour l'incendie de végétation...\n";
         Interventie* interventie_incendiu = unitate.mobilizeaza_resurse_pentru_urgenta(incendiu_veg);
-        std::cout << "   ✓ Intervenție creată cu ID: " << interventie_incendiu->get_id() << "\n";
-        std::cout << "   ✓ Pompieri mobilizați: " << interventie_incendiu->get_pompieri_mobilizati().size() << "\n";
-        std::cout << "   ✓ Șoferi mobilizați: " << interventie_incendiu->get_soferi_mobilizati().size() << "\n";
-        std::cout << "   ✓ Autospeciale mobilizate: " << interventie_incendiu->get_autospeciale_mobilizate().size() << "\n\n";
+        std::cout << "   ✓ Intervention créée avec ID : " << interventie_incendiu->get_id() << "\n";
+        std::cout << "   ✓ Pompiers mobilisés : " << interventie_incendiu->get_pompieri_mobilizati().size() << "\n";
+        std::cout << "   ✓ Conducteurs mobilisés : " << interventie_incendiu->get_soferi_mobilizati().size() << "\n";
+        std::cout << "   ✓ Véhicules spéciaux mobilisés : " << interventie_incendiu->get_autospeciale_mobilizate().size() << "\n\n";
 
-        // Demonstrează operatorul ++
-        std::cout << "6. Demonstrarea operatorului ++ pentru pompieri...\n";
+        // Démontre l'opérateur ++
+        std::cout << "6. Démonstration de l'opérateur ++ pour les pompiers...\n";
         for (auto* pompier_ptr : interventie_accident->get_pompieri_mobilizati()) {
             if (auto* pompier = dynamic_cast<Pompier*>(pompier_ptr)) {
                 std::cout << "   Pompier " << pompier->get_nume() 
-                          << " - experiență înainte: " << pompier->get_numar_interventii();
+                          << " - expérience avant : " << pompier->get_numar_interventii();
                 ++(*pompier);
-                std::cout << ", după: " << pompier->get_numar_interventii() << "\n";
+                std::cout << ", après : " << pompier->get_numar_interventii() << "\n";
             }
         }
         std::cout << "\n";
 
-        // Finalizează intervențiile și returnează resursele
-        std::cout << "7. Finalizarea intervențiilor și returnarea resurselor...\n";
+        // Finalise les interventions et retourne les ressources
+        std::cout << "7. Finalisation des interventions et retour des ressources...\n";
         unitate.returneaza_resurse_din_interventie(interventie_accident);
-        std::cout << "   ✓ Intervenția " << interventie_accident->get_id() << " finalizată\n";
+        std::cout << "   ✓ Intervention " << interventie_accident->get_id() << " finalisée\n";
         
         unitate.returneaza_resurse_din_interventie(interventie_incendiu);
-        std::cout << "   ✓ Intervenția " << interventie_incendiu->get_id() << " finalizată\n\n";
+        std::cout << "   ✓ Intervention " << interventie_incendiu->get_id() << " finalisée\n\n";
 
-        // Demonstrează tratarea excepțiilor
-        std::cout << "8. Testarea tratării excepțiilor...\n";
+        // Démontre le traitement des exceptions
+        std::cout << "8. Test du traitement des exceptions...\n";
         try {
-            // Încearcă să mobilizeze resurse pentru un incendiu mare (care ar putea să nu aibă resurse suficiente)
-            I_Urgenta* incendiu_mare = factory_urgente.create_new_Incendiu_Electric("Clădire înaltă", 5, 50, 1000.0);
+            // Essaie de mobiliser des ressources pour un grand incendie (qui pourrait ne pas avoir assez de ressources)
+            I_Urgenta* incendiu_mare = factory_urgente.create_new_Incendiu_Electric("Bâtiment élevé", 5, 50, 1000.0);
             Interventie* interventie_mare = unitate.mobilizeaza_resurse_pentru_urgenta(incendiu_mare);
-            std::cout << "   ✓ Intervenția pentru incendiu mare a fost creată cu succes!\n";
+            std::cout << "   ✓ L'intervention pour le grand incendie a été créée avec succès !\n";
         }
         catch (const InsufficientFirefightersException& e) {
-            std::cout << "   ⚠ Excepție prinsă: " << e.get_message() << " (cod: " << e.get_code() << ")\n";
+            std::cout << "   ⚠ Exception capturée : " << e.get_message() << " (code : " << e.get_code() << ")\n";
         }
         catch (const InsufficientVehiclesException& e) {
-            std::cout << "   ⚠ Excepție prinsă: " << e.get_message() << " (cod: " << e.get_code() << ")\n";
+            std::cout << "   ⚠ Exception capturée : " << e.get_message() << " (code : " << e.get_code() << ")\n";
         }
         catch (const std::exception& e) {
-            std::cout << "   ⚠ Excepție generală: " << e.what() << "\n";
+            std::cout << "   ⚠ Exception générale : " << e.what() << "\n";
         }
 
-        std::cout << "\n=== DEMONSTRAȚIA S-A FINALIZAT CU SUCCES! ===\n";
-        std::cout << "Toate funcționalitățile au fost testate:\n";
-        std::cout << "✓ Încărcarea datelor din fișier\n";
-        std::cout << "✓ Popularea turii cu resurse\n";
-        std::cout << "✓ Crearea urgențelor\n";
-        std::cout << "✓ Mobilizarea resurselor\n";
-        std::cout << "✓ Supraîncărcarea operatorului ++\n";
-        std::cout << "✓ Returnarea resurselor\n";
-        std::cout << "✓ Tratarea excepțiilor\n";
+        std::cout << "\n=== LA DÉMONSTRATION S'EST TERMINÉE AVEC SUCCÈS ! ===\n";
+        std::cout << "Toutes les fonctionnalités ont été testées :\n";
+        std::cout << "✓ Chargement des données depuis le fichier\n";
+        std::cout << "✓ Population du tour avec des ressources\n";
+        std::cout << "✓ Création d'urgences\n";
+        std::cout << "✓ Mobilisation des ressources\n";
+        std::cout << "✓ Surcharge de l'opérateur ++\n";
+        std::cout << "✓ Retour des ressources\n";
+        std::cout << "✓ Traitement des exceptions\n";
 
     }
     catch (const std::exception& e) {
-        std::cerr << "Eroare în aplicație: " << e.what() << std::endl;
+        std::cerr << "Erreur dans l'application : " << e.what() << std::endl;
         return 1;
     }
 

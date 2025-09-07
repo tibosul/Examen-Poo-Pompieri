@@ -28,14 +28,14 @@ public:
 	virtual inline void set_adresa(const std::string& adresa) override { this->adresa = adresa; }
 	virtual inline void set_numar_victime(int numar_victime) override { this->numar_victime = numar_victime; }
 
-	virtual inline int get_numar_vehicule() const override { throw Wrong_Urgenta_Type("Nu e accident"); }
-	virtual inline void set_numar_vehicule(int numar_vehicule) override { throw Wrong_Urgenta_Type("Nu e accident"); }
+	virtual inline int get_numar_vehicule() const override { throw Wrong_Urgenta_Type("N'est pas un accident"); }
+	virtual inline void set_numar_vehicule(int numar_vehicule) override { throw Wrong_Urgenta_Type("N'est pas un accident"); }
 
-	virtual inline int get_inaltime() const { throw Wrong_Urgenta_Type("Nu e incendiu"); }
-	virtual inline double get_arie() const { throw Wrong_Urgenta_Type("Nu e incendiu"); }
+	virtual inline int get_inaltime() const { throw Wrong_Urgenta_Type("N'est pas un incendie"); }
+	virtual inline double get_arie() const { throw Wrong_Urgenta_Type("N'est pas un incendie"); }
 
-	virtual inline void set_inaltime(int inaltime) { throw Wrong_Urgenta_Type("Nu e incendiu"); }
-	virtual inline void set_arie(double arie) { throw Wrong_Urgenta_Type("Nu e incendiu"); }
+	virtual inline void set_inaltime(int inaltime) { throw Wrong_Urgenta_Type("N'est pas un incendie"); }
+	virtual inline void set_arie(double arie) { throw Wrong_Urgenta_Type("N'est pas un incendie"); }
 
 
 	virtual inline int get_numar_departatoare_necesare() const override { return this->numar_departatoare_necesare; }

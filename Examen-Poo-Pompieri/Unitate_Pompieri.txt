@@ -1,35 +1,35 @@
-# Unitate de Pompieri - Date inițiale
-# Format: tip_obiect|parametri_separati_prin_virgula
+# Unité de Pompiers - Données initiales
+# Format: type_objet|parametres_separes_par_virgule
 
-# Pompieri
+# Pompiers
 Pompier|Ion Popescu,10
 Pompier|Maria Ionescu,5
 Pompier|Gheorghe Dumitrescu,15
 Pompier|Ana Marinescu,8
 Pompier|Mihai Constantinescu,12
 
-# Șoferi
+# Conducteurs
 Sofer|Vasile Petrescu
 Sofer|Elena Georgescu
 Sofer|Alexandru Radu
 Sofer|Cristina Moldovan
 
-# Autoscari
+# Échelles
 Autoscara|25.5
 Autoscara|30.0
 Autoscara|20.0
 
-# Autospeciale de descarcerare
+# Véhicules spéciaux de désincarcération
 Autospeciala_Descarcerare|2,1
 Autospeciala_Descarcerare|3,2
 Autospeciala_Descarcerare|1,1
 
-# Autospeciale de stingere cu pulbere
+# Véhicules spéciaux d'extinction à poudre
 Autospeciala_Stingere_Pulbere|500.0
 Autospeciala_Stingere_Pulbere|750.0
 Autospeciala_Stingere_Pulbere|600.0
 
-# Autospeciale de stingere cu spumă
+# Véhicules spéciaux d'extinction à mousse
 Autospeciala_Stingere_Spuma|400.0
 Autospeciala_Stingere_Spuma|600.0
 Autospeciala_Stingere_Spuma|500.0

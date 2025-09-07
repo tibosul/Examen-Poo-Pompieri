@@ -28,7 +28,7 @@ protected:
 	std::vector<I_Urgenta*> urgente;
 
 	std::vector<std::pair<int, int>> soferi_autospeciale;
-	std::map<int, int> autospeciala_sofer; // -1 pentru sofer daca autospeciala nu are sofer la un moment dat
+	std::map<int, int> autospeciala_sofer; // -1 pour conducteur si véhicule spécial n'a pas de conducteur à un moment donné
 
 	Tura& tura = Tura::get_instance();
 

@@ -51,7 +51,7 @@ Interventie* Unitate_Pompieri::mobilizeaza_resurse_pentru_urgenta(I_Urgenta* urg
     int pompieri_necesari = urgenta->get_numar_pompieri_necesari();
     if (pompieri_necesari > 0) {
         if (!tura.destui_pompieri(pompieri_necesari)) {
-            throw InsufficientFirefightersException("Nu sunt suficienți pompieri disponibili");
+            throw InsufficientFirefightersException("Pas assez de pompiers disponibles");
         }
         
         auto pompieri_mutati = tura.muta_pompieri(pompieri_necesari);
@@ -77,7 +77,7 @@ Interventie* Unitate_Pompieri::mobilizeaza_resurse_pentru_urgenta(I_Urgenta* urg
     int departatoare_necesare = urgenta->get_numar_departatoare_necesare();
     if (departatoare_necesare > 0) {
         if (!tura.destule_departatoare(departatoare_necesare)) {
-            throw InsufficientVehiclesException("Nu sunt suficiente depărtătoare disponibile");
+            throw InsufficientVehiclesException("Pas assez d'écarteurs disponibles");
         }
         
         auto autospeciale_desc = tura.muta_autospeciale_descarcerare(1); // Minimum 1 vehicul
@@ -91,7 +91,7 @@ Interventie* Unitate_Pompieri::mobilizeaza_resurse_pentru_urgenta(I_Urgenta* urg
     double pulbere_necesara = urgenta->get_pulbere_necesara();
     if (pulbere_necesara > 0) {
         if (!tura.destula_pulbere(pulbere_necesara)) {
-            throw InsufficientVehiclesException("Nu este suficientă pulbere disponibilă");
+            throw InsufficientVehiclesException("Pas assez de poudre disponible");
         }
         
         auto autospeciale_pulbere = tura.muta_autospeciale_stingere_pulbere(pulbere_necesara);
@@ -105,7 +105,7 @@ Interventie* Unitate_Pompieri::mobilizeaza_resurse_pentru_urgenta(I_Urgenta* urg
     double spuma_necesara = urgenta->get_spuma_necesara();
     if (spuma_necesara > 0) {
         if (!tura.destula_spuma(spuma_necesara)) {
-            throw InsufficientVehiclesException("Nu este suficientă spumă disponibilă");
+            throw InsufficientVehiclesException("Pas assez de mousse disponible");
         }
         
         auto autospeciale_spuma = tura.muta_autospeciale_stingere_spuma(spuma_necesara);
@@ -169,12 +169,12 @@ void Unitate_Pompieri::incarca_date_din_fisier(const std::string& nume_fisier)
 {
     std::ifstream fisier(nume_fisier);
     if (!fisier.is_open()) {
-        throw FileNotFound("Nu s-a putut deschide fișierul: " + nume_fisier);
+        throw FileNotFound("Impossible d'ouvrir le fichier : " + nume_fisier);
     }
 
     std::string linie;
     while (std::getline(fisier, linie)) {
-        // Ignoră liniile goale și comentariile
+        // Ignore les lignes vides et les commentaires
         if (linie.empty() || linie[0] == '#') {
             continue;
         }
