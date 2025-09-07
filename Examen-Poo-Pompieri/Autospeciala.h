@@ -9,8 +9,6 @@ protected:
 
 public:
 	Autospeciala();
-	Autospeciala(const Autospeciala&) = default;
-	Autospeciala(Autospeciala&&) = default;
 	virtual ~Autospeciala() override = default;
 
 	inline int get_id() const { return this->id_unic; }

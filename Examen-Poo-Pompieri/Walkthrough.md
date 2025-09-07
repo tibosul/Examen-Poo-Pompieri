@@ -164,7 +164,7 @@ I_Urgenta
 
 #### Clasa Autospeciala
 - `id_unic` - ID generat automat
-- Constructori: default, copy, move
+- Constructor: default
 - Destructor virtual pentru polimorfism
 - Getters/setters pentru ID
 
