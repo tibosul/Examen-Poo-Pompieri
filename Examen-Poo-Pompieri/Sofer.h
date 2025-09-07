@@ -3,6 +3,6 @@
 
 class Sofer : public Angajat
 {
-
+	
 };
 

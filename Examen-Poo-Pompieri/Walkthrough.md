@@ -145,4 +145,59 @@ I_Urgenta
 
 **Puncte obținute**: 3p (Crearea claselor și arhitectura generală) + 1p (Design Patterns - Factory)
 
+### Pasul 2: Implementarea membrilor de bază ai claselor ✅ COMPLETAT
+
+**Obiectiv**: Adăugarea membrilor de bază și metodelor fundamentale pentru fiecare clasă, fără a complica relațiile între clase.
+
+**Principii urmărite**:
+- Fiecare clasă conține doar datele specifice ei
+- Nu se stochează relații complexe între clase (ex: șoferii nu stochează lista de autospeciale)
+- Relațiile vor fi gestionate în `Unitate_Pompieri` pentru cod mai curat
+
+**Implementări realizate**:
+
+#### Clasa Angajat
+- `id_unic` - ID generat automat cu `Unique_ID_Generator`
+- `nume` - numele angajatului
+- Constructori: default, cu nume
+- Getters/setters pentru toți membrii
+
+#### Clasa Autospeciala
+- `id_unic` - ID generat automat
+- Constructori: default, copy, move
+- Destructor virtual pentru polimorfism
+- Getters/setters pentru ID
+
+#### Clasa Urgenta
+- `adresa` - adresa unde s-a produs urgența
+- `numar_victime` - numărul de victime
+- Constructori: default, cu parametri
+- Getters/setters pentru toți membrii
+
+#### Clase derivate specifice:
+
+**Pompier** - moștenește de la Angajat (fără membri suplimentari încă)
+
+**Sofer** - moștenește de la Angajat (fără membri suplimentari încă)
+
+**Autoscara**:
+- `lungime_scara` - lungimea scării în metri
+
+**Autospeciala_Descarcerare**:
+- `numar_departatoare` - numărul de depărtătoare hidraulice
+- `numar_foarfece` - numărul de foarfece hidraulice
+
+**Incendiu**:
+- `inaltime` - înălțimea incendiului în metri
+- `arie` - suprafața incendiului în metri pătrați
+
+**Accident**:
+- `numar_vehicule` - numărul de vehicule implicate
+
+**Avantaje ale acestei abordări**:
+1. **Cod curat** - fiecare clasă are responsabilități clare
+2. **Flexibilitate** - relațiile pot fi gestionate centralizat
+3. **Testabilitate** - clasele pot fi testate independent
+4. **Mentenabilitate** - modificările sunt localizate
+
 **Următorul pas**: Implementarea interfețelor și metodelor virtuale
