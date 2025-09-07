@@ -21,6 +21,21 @@ public:
 
 	virtual inline void set_inaltime(int inaltime) = 0;
 	virtual inline void set_arie(double arie) = 0;
+
+
+	virtual inline int get_numar_departatoare_necesare() const = 0;
+	virtual inline int get_numar_foarfece_necesare() const = 0;
+	virtual inline double get_pulbere_necesara() const = 0;
+	virtual inline double get_spuma_necesara() const = 0;
+	virtual inline int get_autoscari_necesare() const = 0;
+	virtual inline int get_numar_pompieri_necesari() const = 0;
+
+	virtual inline void set_numar_departatoare_necesare(int numar_departatoare_necesare) = 0;
+	virtual inline void set_numar_foarfece_necesare(int numar_foarfece_necesare) = 0;
+	virtual inline void set_pulbere_necesara(double pulbere_necesara) = 0;
+	virtual inline void set_spuma_necesara(double spuma_necesara) = 0;
+	virtual inline void set_autoscari_necesare(int autoscari_necesare) = 0;
+	virtual inline void set_numar_pompieri_necesari(int numar_pompieri_necesari) = 0;
 };
 
 class I_Urgenta_Factory

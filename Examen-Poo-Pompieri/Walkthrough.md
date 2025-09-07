@@ -370,11 +370,22 @@ protected:
 - `autoscari_necesare = (inaltime > 2) ? (1 + numar_victime / 20) : 0`
 - `numar_pompieri_necesari = (inaltime > 10) ? (1 + arie / 20.0) : (1 + arie / 25.0)`
 
+#### Metode de acces implementate
+**În I_Urgenta** (interfața):
+- Toate metodele sunt pure virtuale (`= 0`)
+- Getters și setters pentru toate resursele necesare
+
+**În Urgenta** (clasa de bază):
+- Implementări cu `override` pentru toate metodele
+- Returnează valorile membrilor protejați
+- Setters pentru modificarea valorilor
+
 #### Avantaje ale acestei abordări:
 1. **Centralizare** - toate resursele sunt în clasa de bază
 2. **Valori implicite** - resursele neaplicabile rămân 0
 3. **Calcul automat** - resursele se calculează la crearea urgenței
 4. **Flexibilitate** - ușor de adăugat noi tipuri de resurse
 5. **Consistență** - toate urgențele au aceeași structură de resurse
+6. **Acces complet** - getters și setters pentru toate resursele
 
 **Următorul pas**: Implementarea logicii de mutare a resurselor din tură
