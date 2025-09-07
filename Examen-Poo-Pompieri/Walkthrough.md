@@ -200,4 +200,55 @@ I_Urgenta
 3. **Testabilitate** - clasele pot fi testate independent
 4. **Mentenabilitate** - modificările sunt localizate
 
-**Următorul pas**: Implementarea interfețelor și metodelor virtuale
+### Pasul 3: Implementarea interfețelor și Factory Pattern-ului ✅ COMPLETAT
+
+**Obiectiv**: Implementarea interfețelor cu metode virtuale și Factory Pattern pentru crearea obiectelor.
+
+**Implementări realizate**:
+
+#### Interfețe cu metode virtuale
+- `I_Angajat` - interfața de bază pentru angajați cu destructor virtual
+- `I_Autospeciala` - interfața de bază pentru vehicule speciale cu destructor virtual  
+- `I_Urgenta` - interfața de bază pentru urgențe cu destructor virtual
+
+#### Factory Pattern implementat
+
+**I_Angajat_Factory**:
+- `create_new_Pompier()` - constructor default
+- `create_new_Pompier(const std::string& nume)` - cu nume
+- `create_new_Pompier(const std::string& nume, int numar_interventii)` - cu nume și experiență
+- `create_new_Sofer()` - constructor default
+- `create_new_Sofer(const std::string& nume)` - cu nume
+
+**I_Autospeciala_Factory**:
+- `create_new_Autoscara()` și `create_new_Autoscara(double lungime_scara)`
+- `create_new_Autospeciala_Descarcerare()` și cu parametri pentru echipamente
+- `create_new_Autospeciala_Stingere_Pulbere()` și cu capacitate material
+- `create_new_Autospeciala_Stingere_Spuma()` și cu capacitate material
+
+**I_Urgenta_Factory**:
+- `create_new_Accident()` cu toate variantele de constructori
+- `create_new_Incendiu_Electric()` cu toate variantele de constructori
+- `create_new_Incendiu_Vegetatie()` cu toate variantele de constructori
+
+#### Membri adăugați în clasele derivate
+
+**Pompier**:
+- `numar_interventii` - experiența pompierului
+- Constructori: default, cu nume, cu nume și experiență
+
+**Sofer**:
+- Constructori: default, cu nume (fără membri suplimentari încă)
+
+**Autospeciala_Stingere_Pulbere/Spuma**:
+- Constructori: default, cu capacitate material
+
+**Avantaje**:
+1. **Polimorfism** - destructorii virtuali permit gestionarea corectă a obiectelor prin pointeri la interfețe
+2. **Factory Pattern** - centralizează crearea obiectelor și ascunde complexitatea
+3. **Flexibilitate** - multiple variante de constructori pentru diferite scenarii
+4. **Encapsulare** - Factory-urile ascund detaliile de implementare
+
+**Puncte obținute**: 1p (Interfețe și metode virtuale) + 1p (Design Patterns - Factory)
+
+**Următorul pas**: Implementarea logicii de mutare a resurselor din tură

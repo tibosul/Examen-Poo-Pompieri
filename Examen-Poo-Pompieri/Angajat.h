@@ -10,10 +10,8 @@ protected:
 	std::string nume;
 
 public:
-	Angajat() = default;
+	Angajat();
 	Angajat(const std::string& nume);
-	Angajat(const Angajat&) = default;
-	Angajat(Angajat&&) = default;
 	virtual ~Angajat() override = default;
 
 	inline int get_id() const { return this->id_unic; }

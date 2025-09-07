@@ -2,6 +2,11 @@
 
 using Angajat_ID_Generator = Unique_ID_Generator<Angajat>;
 
+Angajat::Angajat()
+	:I_Angajat()
+{
+}
+
 Angajat::Angajat(const std::string& nume)
 	:I_Angajat()
 {
