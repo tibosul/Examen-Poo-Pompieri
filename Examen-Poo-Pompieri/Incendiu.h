@@ -13,11 +13,11 @@ public:
 	Incendiu(const std::string& adresa, int numar_victime, int inaltime, double arie);
 	virtual ~Incendiu() override = default;
 
-	inline int get_inaltime() const { return this->inaltime; }
-	inline double get_arie() const { return this->arie; }
+	virtual inline int get_inaltime() const override { return this->inaltime; }
+	virtual inline double get_arie() const override { return this->arie; }
 
-	inline void set_inaltime(int inaltime) { this->inaltime = inaltime; }
-	inline void set_arie(double arie) { this->arie = arie; }
+	virtual inline void set_inaltime(int inaltime) override { this->inaltime = inaltime; }
+	virtual inline void set_arie(double arie) override { this->arie = arie; }
 
 };
 

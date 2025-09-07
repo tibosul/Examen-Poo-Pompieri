@@ -241,4 +241,140 @@ I_Urgenta
 
 **Puncte obținute**: 1p (Interfețe și metode virtuale) + 1p (Design Patterns - Factory)
 
+### Pasul 4: Implementarea metodelor virtuale și polimorfismului ✅ COMPLETAT
+
+**Obiectiv**: Implementarea metodelor virtuale în interfețe și clasele derivate pentru polimorfism corect.
+
+**Implementări realizate**:
+
+#### Interfețe cu metode pure virtuale (= 0)
+- `I_Angajat` - toate metodele sunt pure virtuale
+- `I_Autospeciala` - toate metodele sunt pure virtuale  
+- `I_Urgenta` - toate metodele sunt pure virtuale
+
+#### Clase de bază cu implementări și excepții
+**Angajat**:
+- Implementează metodele comune (`get_id`, `get_nume`, `set_id`, `set_nume`)
+- Aruncă `Wrong_Angajat_Type` pentru metodele specifice pompierilor (`get_numar_interventii`)
+
+**Autospeciala**:
+- Implementează metodele comune (`get_id`, `set_id`)
+- Aruncă `Wrong_Autospeciala_Type` pentru metodele specifice fiecărui tip de vehicul
+
+**Urgenta**:
+- Implementează metodele comune (`get_adresa`, `get_numar_victime`, `set_adresa`, `set_numar_victime`)
+- Aruncă `Wrong_Urgenta_Type` pentru metodele specifice fiecărui tip de urgență
+
+#### Clase derivate cu override
+**Pompier**:
+- Override pentru `get_numar_interventii()` și `set_numar_interventii()`
+
+**Accident**:
+- Override pentru `get_numar_vehicule()` și `set_numar_vehicule()`
+
+**Incendiu**:
+- Override pentru `get_inaltime()`, `get_arie()`, `set_inaltime()`, `set_arie()`
+
+#### Excepții definite
+```cpp
+DEFINE_EXCEPTION(Wrong_Angajat_Type, 1001);
+DEFINE_EXCEPTION(Wrong_Autospeciala_Type, 1002);
+DEFINE_EXCEPTION(Wrong_Urgenta_Type, 1003);
+```
+
+**Avantaje**:
+1. **Polimorfism corect** - metodele virtuale permit gestionarea obiectelor prin pointeri la interfețe
+2. **Type safety** - excepțiile previne accesarea metodelor greșite
+3. **Extensibilitate** - ușor de adăugat noi tipuri de obiecte
+4. **Encapsulare** - fiecare clasă implementează doar metodele relevante
+
+**Puncte obținute**: 1p (Interfețe și metode virtuale) - consolidat
+
+### Pasul 5: Implementarea structurii de date în Unitate_Pompieri ✅ COMPLETAT
+
+**Obiectiv**: Crearea structurii de date centralizate pentru gestionarea tuturor obiectelor din aplicație.
+
+**Implementări realizate**:
+
+#### Structura de date în Unitate_Pompieri
+```cpp
+private:
+    std::map<int, I_Angajat*> angajati;           // id -> angajat
+    std::map<int, I_Autospeciala*> autospeciale;  // id -> vehicul
+    std::map<int, Interventie*> interventii;      // id -> intervenție
+    std::vector<I_Urgenta*> urgente;              // urgențe active
+    
+    std::vector<std::pair<int, int>> soferi_autospeciale; // experiența șoferilor
+```
+
+#### Metode de management
+- `add_angajat(I_Angajat* angajat)` - adaugă angajat în map
+- `add_autospeciala(I_Autospeciala* autospeciala)` - adaugă vehicul în map
+- `add_interventie(Interventie* interventie)` - adaugă intervenție în map
+- `add_urgenta(I_Urgenta* urgenta)` - adaugă urgență în vector
+
+#### Auto-inserare în constructori
+**Pompier**:
+- Toți constructorii apelează `Unitate_Pompieri::get_instance().add_angajat(this)`
+- Angajatul se înregistrează automat la creare
+
+**Sofer**:
+- Toți constructorii apelează `Unitate_Pompieri::get_instance().add_angajat(this)`
+- Șoferul se înregistrează automat la creare
+
+**Autospeciala**:
+- Constructorul generează ID automat cu `Unique_ID_Generator`
+- ID-ul este atribuit automat la creare
+
+**Avantaje**:
+1. **Centralizare** - toate obiectele sunt gestionate într-un singur loc
+2. **Auto-registrare** - obiectele se înregistrează automat la creare
+3. **Căutări rapide** - prin ID în maps
+4. **Singleton Pattern** - o singură instanță pentru toată aplicația
+5. **Experiență șoferi** - stocată în `soferi_autospeciale` pentru verificări ulterioare
+
+### Pasul 6: Implementarea calculului resurselor necesare ✅ COMPLETAT
+
+**Obiectiv**: Calculul automat al resurselor necesare pentru fiecare tip de urgență în clasa de bază `Urgenta`.
+
+**Implementări realizate**:
+
+#### Membri pentru resurse în clasa Urgenta
+```cpp
+protected:
+    // Resursele necesare pentru intervenție
+    int numar_departatoare_necesare = 0;
+    int numar_foarfece_necesare = 0;
+    double pulbere_necesara = 0.0;
+    double spuma_necesara = 0.0;
+    int autoscari_necesare = 0;
+    int numar_pompieri_necesari = 0;
+```
+
+#### Calculul resurselor în constructori
+
+**Accident**:
+- `numar_departatoare_necesare = numar_vehicule - 1`
+- `numar_foarfece_necesare = 1`
+- `spuma_necesara = 0` (implicit, nu este necesară)
+
+**Incendiu_Electric**:
+- `pulbere_necesara = arie / 20.0`
+- `numar_departatoare_necesare = 0` (implicit, nu sunt necesare)
+
+**Incendiu_Vegetatie**:
+- `spuma_necesara = arie / 15.0`
+- `numar_departatoare_necesare = 0` (implicit, nu sunt necesare)
+
+**Incendiu** (clasa de bază):
+- `autoscari_necesare = (inaltime > 2) ? (1 + numar_victime / 20) : 0`
+- `numar_pompieri_necesari = (inaltime > 10) ? (1 + arie / 20.0) : (1 + arie / 25.0)`
+
+#### Avantaje ale acestei abordări:
+1. **Centralizare** - toate resursele sunt în clasa de bază
+2. **Valori implicite** - resursele neaplicabile rămân 0
+3. **Calcul automat** - resursele se calculează la crearea urgenței
+4. **Flexibilitate** - ușor de adăugat noi tipuri de resurse
+5. **Consistență** - toate urgențele au aceeași structură de resurse
+
 **Următorul pas**: Implementarea logicii de mutare a resurselor din tură

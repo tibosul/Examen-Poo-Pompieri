@@ -12,8 +12,7 @@ public:
 	Pompier(const std::string& nume, int numar_interventii);
 	virtual ~Pompier() override = default;
 
-	inline int get_numar_interventii() const { return this->numar_interventii; }
-
-	inline void set_numar_interventii(int numar_interventii) { this->numar_interventii = numar_interventii; }
+	virtual inline int get_numar_interventii() const override { return this->numar_interventii; }
+	virtual inline void set_numar_interventii(int numar_interventii) override { this->numar_interventii = numar_interventii; }
 };
 

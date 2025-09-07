@@ -13,4 +13,5 @@ Incendiu_Vegetatie::Incendiu_Vegetatie(const std::string& adresa, int numar_vict
 Incendiu_Vegetatie::Incendiu_Vegetatie(const std::string& adresa, int numar_victime, int inaltime, double arie)
 	:Incendiu(adresa, numar_victime, inaltime, arie)
 {
+	this->spuma_necesara = this->arie / 15.0;
 }

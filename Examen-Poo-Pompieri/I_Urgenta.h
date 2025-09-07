@@ -1,10 +1,26 @@
 #pragma once
+#include <string>
 
 class I_Urgenta
 {
 public:
 	I_Urgenta() = default;
 	virtual ~I_Urgenta() = default;
+
+	virtual inline const std::string& get_adresa() const = 0;
+	virtual inline int get_numar_victime() const = 0;
+
+	virtual inline void set_adresa(const std::string& adresa) = 0;
+	virtual inline void set_numar_victime(int numar_victime) = 0;
+
+	virtual inline int get_numar_vehicule() const = 0;
+	virtual inline void set_numar_vehicule(int numar_vehicule) = 0;
+
+	virtual inline int get_inaltime() const = 0;
+	virtual  inline double get_arie() const = 0;
+
+	virtual inline void set_inaltime(int inaltime) = 0;
+	virtual inline void set_arie(double arie) = 0;
 };
 
 class I_Urgenta_Factory

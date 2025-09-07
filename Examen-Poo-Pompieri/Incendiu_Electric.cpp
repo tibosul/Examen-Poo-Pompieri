@@ -13,4 +13,5 @@ Incendiu_Electric::Incendiu_Electric(const std::string& adresa, int numar_victim
 Incendiu_Electric::Incendiu_Electric(const std::string& adresa, int numar_victime, int inaltime, double arie)
 	:Incendiu(adresa, numar_victime, inaltime, arie)
 {
+	this->pulbere_necesara = this->arie / 20.0;
 }

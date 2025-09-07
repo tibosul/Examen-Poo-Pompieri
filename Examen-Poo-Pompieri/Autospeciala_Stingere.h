@@ -11,9 +11,8 @@ public:
 	Autospeciala_Stingere(double capacitate_material);
 	virtual ~Autospeciala_Stingere() override = default;
 
-	inline double get_capacitate_material() const { return this->capacitate_material; }
-
-	inline void set_capacitate_material(double capacitate_material) { this->capacitate_material = capacitate_material; }
+	virtual inline double get_capacitate_material() const override { return this->capacitate_material; }
+	virtual inline void set_capacitate_material(double capacitate_material) override { this->capacitate_material = capacitate_material; }
 
 };
 

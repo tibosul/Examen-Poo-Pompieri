@@ -30,3 +30,7 @@ public:
 };
 
 #define DEFINE_EXCEPTION(exception_name, exception_code) using exception_name = Derived_Exception<exception_code>
+
+DEFINE_EXCEPTION(Wrong_Angajat_Type, 1001);
+DEFINE_EXCEPTION(Wrong_Autospeciala_Type, 1002);
+DEFINE_EXCEPTION(Wrong_Urgenta_Type, 1003);

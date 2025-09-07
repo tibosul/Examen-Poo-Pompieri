@@ -11,9 +11,8 @@ public:
 	Autoscara(double lungime_scara);
 	virtual ~Autoscara() override = default;
 
-	inline double get_lungime_scara() const { return this->lungime_scara; }
-
-	inline void set_lungime_scara(double lungime_scara) { this->lungime_scara = lungime_scara; }
+	virtual inline double get_lungime_scara() const override { return this->lungime_scara; }
+	virtual inline void set_lungime_scara(double lungime_scara) override { this->lungime_scara = lungime_scara; }
 
 };
 
