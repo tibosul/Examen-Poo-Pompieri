@@ -194,6 +194,18 @@ I_Urgenta
 **Accident**:
 - `numar_vehicule` - numărul de vehicule implicate
 
+**Membri adăugați în clasele derivate**:
+
+**Pompier**:
+- `numar_interventii` - experiența pompierului
+- Constructori: default, cu nume, cu nume și experiență
+
+**Sofer**:
+- Constructori: default, cu nume (fără membri suplimentari încă)
+
+**Autospeciala_Stingere_Pulbere/Spuma**:
+- Constructori: default, cu capacitate material
+
 **Avantaje ale acestei abordări**:
 1. **Cod curat** - fiecare clasă are responsabilități clare
 2. **Flexibilitate** - relațiile pot fi gestionate centralizat
@@ -230,18 +242,6 @@ I_Urgenta
 - `create_new_Accident()` cu toate variantele de constructori
 - `create_new_Incendiu_Electric()` cu toate variantele de constructori
 - `create_new_Incendiu_Vegetatie()` cu toate variantele de constructori
-
-#### Membri adăugați în clasele derivate
-
-**Pompier**:
-- `numar_interventii` - experiența pompierului
-- Constructori: default, cu nume, cu nume și experiență
-
-**Sofer**:
-- Constructori: default, cu nume (fără membri suplimentari încă)
-
-**Autospeciala_Stingere_Pulbere/Spuma**:
-- Constructori: default, cu capacitate material
 
 **Avantaje**:
 1. **Polimorfism** - destructorii virtuali permit gestionarea corectă a obiectelor prin pointeri la interfețe
