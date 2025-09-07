@@ -11,9 +11,6 @@
 #include "Autospeciala_Descarcerare.h"
 #include "Autospeciala_Stingere_Pulbere.h"
 #include "Autospeciala_Stingere_Spuma.h"
-#include "I_Angajat_Factory.h"
-#include "I_Autospeciala_Factory.h"
-#include <stdexcept>
 
 Unitate_Pompieri& Unitate_Pompieri::get_instance()
 {
@@ -172,7 +169,7 @@ void Unitate_Pompieri::incarca_date_din_fisier(const std::string& nume_fisier)
 {
     std::ifstream fisier(nume_fisier);
     if (!fisier.is_open()) {
-        throw std::runtime_error("Nu s-a putut deschide fișierul: " + nume_fisier);
+        throw FileNotFound("Nu s-a putut deschide fișierul: " + nume_fisier);
     }
 
     std::string linie;

@@ -543,4 +543,57 @@ Autospeciala_Stingere_Spuma|600.0
 
 **Puncte obținute**: 1p (Încărcarea datelor din fișiere)
 
-**Următorul pas**: Testarea funcționalității și optimizări finale
+### Pasul 10: Implementarea funcției main și testarea completă ✅ COMPLETAT
+
+**Obiectiv**: Crearea unei funcții main complete care demonstrează toate funcționalitățile implementate.
+
+**Implementări realizate**:
+
+#### Funcția main completă
+```cpp
+int main() {
+    // 1. Încărcarea datelor din fișier
+    // 2. Popularea turii cu resurse
+    // 3. Crearea urgențelor pentru testare
+    // 4. Mobilizarea resurselor pentru accident
+    // 5. Mobilizarea resurselor pentru incendiu
+    // 6. Demonstrarea operatorului ++
+    // 7. Finalizarea intervențiilor
+    // 8. Testarea tratării excepțiilor
+}
+```
+
+#### Funcționalități demonstrate
+1. **Încărcarea datelor din fișier** - folosește `incarca_date_din_fisier()`
+2. **Popularea turii** - adaugă manual pompieri, șoferi și autospeciale
+3. **Crearea urgențelor** - folosește Factory Pattern pentru diferite tipuri
+4. **Mobilizarea resurselor** - demonstrează mutarea din tură în intervenție
+5. **Supraîncărcarea operatorului ++** - incrementează experiența pompierilor
+6. **Returnarea resurselor** - finalizează intervențiile și returnează resursele
+7. **Tratarea excepțiilor** - demonstrează gestionarea erorilor
+
+#### Tipuri de urgențe testate
+- **Accident rutier** - cu 3 vehicule implicate
+- **Incendiu de vegetație** - cu înălțime 5m și arie 100m²
+- **Incendiu electric** - cu înălțime 15m și arie 200m²
+- **Incendiu mare** - pentru testarea excepțiilor
+
+#### Output-ul programului
+Programul afișează:
+- Progresul fiecărui pas
+- Detalii despre urgențele create
+- Numărul de resurse mobilizate
+- Experiența pompierilor înainte și după intervenție
+- Mesaje de succes pentru fiecare operațiune
+- Tratarea excepțiilor când apar
+
+**Avantaje**:
+1. **Demonstrație completă** - testează toate funcționalitățile
+2. **Output informativ** - afișează progresul și rezultatele
+3. **Tratarea erorilor** - demonstrează gestionarea excepțiilor
+4. **Realism** - simulează scenarii reale de intervenție
+5. **Ușurință de înțelegere** - pașii sunt clari și logici
+
+**Puncte obținute**: Demonstrația completă a tuturor funcționalităților
+
+**REZULTAT FINAL**: Aplicația este completă și funcțională! 🎉

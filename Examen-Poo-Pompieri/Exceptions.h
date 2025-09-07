@@ -37,3 +37,4 @@ DEFINE_EXCEPTION(Wrong_Urgenta_Type, 1003);
 DEFINE_EXCEPTION(InsufficientFirefightersException, 1004);
 DEFINE_EXCEPTION(InsufficientVehiclesException, 1005);
 DEFINE_EXCEPTION(NoSuitableDriverException, 1006);
+DEFINE_EXCEPTION(FileNotFound, 1007);
